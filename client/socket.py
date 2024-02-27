@@ -7,11 +7,6 @@ from socket import (
 
 
 class ClientSocket(object):
-    client_soc = socket(
-        AF_INET,
-        SOCK_STREAM
-    )
-
     ip_map = {
         "localhost": "127.0.0.1",
         "workstream-logging-service": "172.19.0.5",
@@ -58,14 +53,15 @@ class ClientSocket(object):
 
 
     def _send_data(self, data: dict, service_name: str) -> bool:
-        self.client_soc.connect(self._get_addr(service_name))
+        client_soc = socket(AF_INET, SOCK_STREAM)
+        client_soc.connect(self._get_addr(service_name))
 
         json_data = json.dumps(data)
 
-        self.client_soc.sendall(json_data.encode("utf-8"))
-        recived = self.client_soc.recv(1024)
+        client_soc.sendall(json_data.encode("utf-8"))
+        recived = client_soc.recv(1024)
 
-        self.client_soc.close()
+        client_soc.close()
 
         # HTTP 202 - accepted
         if "202" in recived.decode('utf-8'):
