@@ -6,7 +6,6 @@ from socket import (
 )
 
 
-
 class ClientSocket(object):
     client_soc = socket(
         AF_INET,
@@ -14,16 +13,20 @@ class ClientSocket(object):
     )
 
     ip_map = {
-        "workstream_logging": "172.19.0.5",
+        "localhost": "127.0.0.1",
+        "workstream-logging-service": "172.19.0.5",
+        "toaster.command-handling-service": "",
+        "toaster.button-handling-service": "",
+        "toaster.message-handling-service": "",
     }
 
     def __init__(self, port: int = 8000):
         self.port = port
 
 
-    def _get_addr(self, service: str):
+    def _get_addr(self, service_name: str):
         addr = (
-            self.ip_map[service],
+            self.ip_map[service_name],
             self.port
         )
 
@@ -37,11 +40,25 @@ class ClientSocket(object):
             "text": text
         }
 
-        return self._send_workstream(data)
+        service_name = "workstream-logging-service"
+
+        return self._send_data(data, service_name)
 
 
-    def _send_workstream(self, data: dict) -> bool:
-        self.client_soc.connect(self._get_addr("workstream_logging"))
+    def transfer_command(self):
+        pass
+
+
+    def transfer_button(self):
+        pass
+
+
+    def transfer_message(self):
+        pass
+
+
+    def _send_data(self, data: dict, service_name: str) -> bool:
+        self.client_soc.connect(self._get_addr(service_name))
 
         json_data = json.dumps(data)
 
