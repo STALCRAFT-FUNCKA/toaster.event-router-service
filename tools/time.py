@@ -1,4 +1,6 @@
-"""_summary_
+"""Module "tools".
+About:
+    
 """
 import time
 from datetime import (
