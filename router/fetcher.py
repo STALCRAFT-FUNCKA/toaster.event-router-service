@@ -38,5 +38,7 @@ class Fetcher(object):
         for vk_event in self.__longpoll.listen():
             event = self.router(vk_event, self.api)
 
+            # TODO: Сделать переброску ивентов в формате JSON на другие сервисы
+
             log_text = f"New event recived:\n{event.attr_str}"
             clsoc.log_workstream(config.SERVICE_NAME, log_text)
