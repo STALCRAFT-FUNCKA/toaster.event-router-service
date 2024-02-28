@@ -37,7 +37,7 @@ class ClientSocket(object):
 
         service_name = "workstream-logging-service"
 
-        return self._send_data(data, service_name)
+        return await self._send_data(data, service_name)
 
 
     async def transfer_command(self):

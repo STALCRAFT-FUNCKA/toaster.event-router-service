@@ -1,6 +1,5 @@
 """A file containing a description of the bot's main class with all its functions.
 """
-import asyncio
 from vk_api import VkApi
 from vk_api.bot_longpoll import (
     VkBotLongPoll,
