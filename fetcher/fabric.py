@@ -31,7 +31,7 @@ class Fabric(object):
         "message_event": ButtonEvent
     }
 
-    def _handle(self, raw_event: dict, api: VkApi) -> BaseEvent:
+    async def _handle(self, raw_event: dict, api: VkApi) -> BaseEvent:
         """The function determines the type of raw event,
         and then routes it to the desired custom event for subsequent redefinition.
 
@@ -49,12 +49,12 @@ class Fabric(object):
         if reason is not None:
             log_text = f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped." \
             f"Reason: {reason}\n"
-            clsoc.log_workstream(config.SERVICE_NAME, log_text)
+            await clsoc.log_workstream(config.SERVICE_NAME, log_text)
 
             return None
 
         return self._fabric_lines[raw_event.get("type")](raw_event, api)
 
 
-    def __call__(self, vk_event: VkBotEvent, api: VkApi) -> BaseEvent:
-        return self._handle(vk_event.raw, api)
+    async def __call__(self, vk_event: VkBotEvent, api: VkApi) -> BaseEvent:
+        return await self._handle(vk_event.raw, api)

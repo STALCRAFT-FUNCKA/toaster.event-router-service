@@ -28,7 +28,7 @@ class ClientSocket(object):
         return addr
 
 
-    def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info") -> bool:
+    async def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info") -> bool:
         data = {
             "name": logger_name,
             "mode": logging_lvl,
@@ -40,19 +40,19 @@ class ClientSocket(object):
         return self._send_data(data, service_name)
 
 
-    def transfer_command(self):
+    async def transfer_command(self):
         pass
 
 
-    def transfer_button(self):
+    async def transfer_button(self):
         pass
 
 
-    def transfer_message(self):
+    async def transfer_message(self):
         pass
 
 
-    def _send_data(self, data: dict, service_name: str) -> bool:
+    async def _send_data(self, data: dict, service_name: str) -> bool:
         client_soc = socket(AF_INET, SOCK_STREAM)
         client_soc.connect(self._get_addr(service_name))
 

@@ -18,7 +18,7 @@ class MessageEvent(BaseEvent):
 
     # message data
     cmid: int
-    text: str
+    text: str # TODO: addtext validating (Optional)
     reply: dict
     forward: list
     attachments: list

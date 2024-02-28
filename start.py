@@ -9,9 +9,10 @@ Author:
     Oidaho (Ruslan Bashinskii)
     oidahomain@gmail.com
 """
-from router import Fetcher
+import asyncio
+from fetcher import Fetcher
 
 fetcher = Fetcher()
 
 if __name__ == "__main__":
-    fetcher.run()
+    asyncio.run(fetcher.run())

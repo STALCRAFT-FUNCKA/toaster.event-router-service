@@ -32,19 +32,23 @@ class Fetcher(object):
 
 
     async def _fabric(self, event: VkBotEvent) -> "BaseEvent":
-        return self.fabricate_event(event, self.api)
+        return await self.fabricate_event(event, self.api)
 
 
-    def run(self):
+    async def _handle(self, event: VkBotEvent):
+        event = await self._fabric(event)
+
+        # TODO: Сделать переброску ивентов в формате JSON на другие сервисы
+
+        log_text = f"New event recived:\n{event.attr_str}"
+        await clsoc.log_workstream(config.SERVICE_NAME, log_text)
+
+
+    async def run(self):
         """Starts listening VK longpoll server.
         """
         log_text = "Starting listening longpoll server..."
-        clsoc.log_workstream(config.SERVICE_NAME, log_text)
+        await clsoc.log_workstream(config.SERVICE_NAME, log_text)
 
         for vk_event in self.__longpoll.listen():
-            event = self._fabric(vk_event)
-
-            # TODO: Сделать переброску ивентов в формате JSON на другие сервисы
-
-            log_text = f"New event recived:\n{event.attr_str}"
-            clsoc.log_workstream(config.SERVICE_NAME, log_text)
+            await self._handle(vk_event)
