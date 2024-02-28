@@ -58,20 +58,21 @@ class ClientSocket(object):
         }
 
         service_name = "workstream-logging-service"
+        #service_name = "localhost"
 
         return await self._send_data(data, service_name)
 
 
-    async def transfer_command(self):
-        pass
+    async def transfer_command(self, event: "MessageEvent"):
+        pass # TODO: Заполнить после поднятия микросервиса
 
 
-    async def transfer_button(self):
-        pass
+    async def transfer_message(self, event: "MessageEvent"):
+        pass # TODO: Заполнить после поднятия микросервиса
 
 
-    async def transfer_message(self):
-        pass
+    async def transfer_button(self, event: "ButtonEvent"):
+        pass # TODO: Заполнить после поднятия микросервиса
 
 
     async def _send_data(self, data: dict, service_name: str) -> bool:
