@@ -22,8 +22,14 @@ class ClientSocket(object):
         "localhost": "127.0.0.1",
         "workstream-logging-service": "172.19.0.5",
         "toaster.command-handling-service": "",
-        "toaster.button-handling-service": "",
         "toaster.message-handling-service": "",
+        "toaster.button-handling-service": "", # TODO: Добавить Ip после поднятия микрух
+    }
+
+    evet_map = {
+        "command_call": "toaster.message-handling-service",
+        "message_new": "toaster.command-handling-service",
+        "button_pressed": "toaster.button-handling-service"
     }
 
     def __init__(self, port: int = 8000):
@@ -63,16 +69,16 @@ class ClientSocket(object):
         return await self._send_data(data, service_name)
 
 
-    async def transfer_command(self, event: "MessageEvent"):
-        pass # TODO: Заполнить после поднятия микросервиса
+    async def transfer_event(self, event: "MessageEvent"):
+        """Sends JSON data to the
+        event handling microservices.
 
-
-    async def transfer_message(self, event: "MessageEvent"):
-        pass # TODO: Заполнить после поднятия микросервиса
-
-
-    async def transfer_button(self, event: "ButtonEvent"):
-        pass # TODO: Заполнить после поднятия микросервиса
+        Args:
+            event (MessageEvent): VK custom message event.
+        """
+        # service = self.evet_map.get(event.event_type)
+        # await self._send_data(event.json, service)
+        # TODO: Раскомментить после поднятия микросервиса
 
 
     async def _send_data(self, data: dict, service_name: str) -> bool:
