@@ -82,8 +82,10 @@ class ClientSocket(object):
 
 
     async def _send_data(self, data: dict, service_name: str) -> bool:
+        addr = self._get_addr(service_name)
+
         client_soc = socket(AF_INET, SOCK_STREAM)
-        client_soc.connect(self._get_addr(service_name))
+        client_soc.connect(addr)
 
         json_data = json.dumps(data)
 
