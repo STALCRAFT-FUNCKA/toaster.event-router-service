@@ -1,6 +1,6 @@
 # ⚙️ TOASTER.EVENT-ROUTING-SERVICE
 
-![lIp6qFj_oSw](https://user-images.githubusercontent.com/76991612/221510792-38d1cfea-d5a9-4971-bc61-3022da20555e.jpg)
+![drt98l](https://github.com/STALCRAFT-FUNCKA/toaster.event-routing-service/assets/76991612/08409484-c9b2-41f3-9b40-8e43614f0661)
 
 Все документпирующая информация продублированна внутри кода на английском языке.<br>
 All documenting information is duplicated within the code in English.<br>
