@@ -6,7 +6,7 @@ from vk_api.bot_longpoll import (
 )
 from client import clsoc
 import config
-from .router import Router
+from .fabric import Fabric
 
 
 class Fetcher(object):
@@ -26,7 +26,7 @@ class Fetcher(object):
 
         self.api = self.__session.get_api()
 
-        self.router = Router()
+        self.fabricate_event = Router()
 
 
     def run(self):
@@ -36,7 +36,7 @@ class Fetcher(object):
         clsoc.log_workstream(config.SERVICE_NAME, log_text)
 
         for vk_event in self.__longpoll.listen():
-            event = self.router(vk_event, self.api)
+            event = self.fabricate_event(vk_event, self.api)
 
             # TODO: Сделать переброску ивентов в формате JSON на другие сервисы
 
