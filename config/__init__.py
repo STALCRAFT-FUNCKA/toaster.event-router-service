@@ -8,7 +8,8 @@ from .config import (
     API_VERSION,
     LONGPOLL_REQUEST_TD,
     SERVICE_NAME,
-    VK_GROUP_ID_DELAY
+    VK_GROUP_ID_DELAY,
+    COMMAND_PREFIXES
 )
 
 
@@ -18,5 +19,6 @@ __all__ = (
     "API_VERSION",
     "LONGPOLL_REQUEST_TD",
     "SERVICE_NAME",
-    "VK_GROUP_ID_DELAY"
+    "VK_GROUP_ID_DELAY",
+    "COMMAND_PREFIXES"
 )
