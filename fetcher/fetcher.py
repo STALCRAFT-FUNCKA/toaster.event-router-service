@@ -13,6 +13,7 @@ from vk_api.bot_longpoll import (
 from client import clsoc
 import config
 from .fabric import Fabric
+from .router import Router
 
 
 class Fetcher(object):
@@ -36,6 +37,13 @@ class Fetcher(object):
         self.api = self.__session.get_api()
 
         self.fabricate_event = Fabric()
+        self.route_event = Router()
+
+    async def _route(self, event: "BaseEvent"):
+        if not await self.route_event(event):
+            reason = "missing route"
+            log_text = f"Unable to route event <{event.event_id}|{reason}>"
+            await clsoc.log_workstream(config.SERVICE_NAME, log_text)
 
 
     async def _fabric(self, event: VkBotEvent) -> "BaseEvent":
@@ -45,10 +53,10 @@ class Fetcher(object):
     async def _handle(self, event: VkBotEvent):
         event = await self._fabric(event)
 
-        # TODO: Сделать переброску ивентов в формате JSON на другие сервисы
-
         log_text = f"New event recived:\n{event.attr_str}"
         await clsoc.log_workstream(config.SERVICE_NAME, log_text)
+
+        await self._route(event)
 
 
     async def run(self):
