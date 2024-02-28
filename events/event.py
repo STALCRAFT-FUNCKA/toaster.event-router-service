@@ -37,6 +37,9 @@ class MessageEvent(BaseEvent):
         self._get_peerdata(message)
         self._get_messagedata(message)
 
+        if self.text.startswith(config.COMMAND_PREFIXES):
+            self.event_type = "command_call"
+
 
     def _get_userdata(self, message: dict):
         self.user_id = message.get("from_id")
