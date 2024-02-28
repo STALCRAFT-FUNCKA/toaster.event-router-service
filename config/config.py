@@ -1,3 +1,7 @@
+"""Module "config".
+About:
+    Service configurations and settings.
+"""
 import os
 
 SERVICE_NAME = "toaster.event-routing-service"

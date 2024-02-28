@@ -1,6 +1,7 @@
 """Module "tools".
 About:
-    
+    A range of features for convenience
+    receiving time according to Moscow time.
 """
 import time
 from datetime import (

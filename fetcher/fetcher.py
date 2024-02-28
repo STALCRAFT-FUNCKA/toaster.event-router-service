@@ -1,4 +1,9 @@
-"""A file containing a description of the bot's main class with all its functions.
+"""Module "fetcher".
+About:
+    A file containing a description of
+    the fetcher main class. Fetcher receives
+    data from VK longpoll server by сщььгтшен 
+    access token.
 """
 from vk_api import VkApi
 from vk_api.bot_longpoll import (
@@ -12,6 +17,9 @@ from .fabric import Fabric
 
 class Fetcher(object):
     """Fetcher main class.
+    Provides receiving events from
+    VK longpoll server with a
+    community access token.
     """
     def __init__(self):
         self.__session = VkApi(
@@ -45,6 +53,10 @@ class Fetcher(object):
 
     async def run(self):
         """Starts listening VK longpoll server.
+        When a new event is received,
+        it sends it for handling,
+        fabricates custom events class
+        instances from raw JSON data.
         """
         log_text = "Starting listening longpoll server..."
         await clsoc.log_workstream(config.SERVICE_NAME, log_text)

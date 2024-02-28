@@ -1,3 +1,9 @@
+"""Module "cliient".
+About:
+    Provides a client socket class for communication
+    with server sockets of other microservices. Allows
+    send data in JSON format.
+"""
 import json
 from socket import (
     socket,
@@ -7,6 +13,11 @@ from socket import (
 
 
 class ClientSocket(object):
+    """Client socket class.
+    Provides functions for sending logs, as well as sending
+    events after previous routing to the necessary
+    microservices for their subsequent handling.
+    """
     ip_map = {
         "localhost": "127.0.0.1",
         "workstream-logging-service": "172.19.0.5",
@@ -29,6 +40,17 @@ class ClientSocket(object):
 
 
     async def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info") -> bool:
+        """Sends JSON data to the
+        general logging microservice.
+
+        Args:
+            logger_name (str): Logger name. (Service name)
+            text (str): Log text.
+            logging_lvl (str, optional): Logging level. Defaults to "info".
+
+        Returns:
+            bool: Transfering status.
+        """
         data = {
             "name": logger_name,
             "mode": logging_lvl,

@@ -1,6 +1,6 @@
-"""Module "router".
+"""Module "fetcher".
 About:
-    A file that describes the router
+    A file that describes the fabric
     class required to create custom
     event objects.
 """

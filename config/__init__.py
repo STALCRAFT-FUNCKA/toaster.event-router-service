@@ -1,3 +1,7 @@
+"""Module "config".
+About:
+    Service configurations and settings.
+"""
 from .config import (
     TOKEN,
     GROUP_ID,

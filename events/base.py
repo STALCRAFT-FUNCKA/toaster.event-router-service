@@ -1,3 +1,9 @@
+"""Module "events".
+About:
+    Provides custom VK events. Convenient form,
+    additional data, nothing superfluous.
+    Base event.
+"""
 import json
 from vk_api import VkApi
 from tools import (
@@ -81,9 +87,12 @@ class BaseEvent(object):
 
 
     @property
-    def attr_str(self):
-        """Returns a string representation of the class's 
-        attribute dictionary in a convenient form.
+    def attr_str(self) -> str:
+        """Returns a string representation of the class's. 
+        Attribute dictionary in a convenient form.
+        
+        Returns:
+            str: Data represintation.
         """
         blacklisted_keys = (
             "_BaseEvent__api",
@@ -101,6 +110,12 @@ class BaseEvent(object):
 
     @property
     def json(self):
+        """Returns a JSON representation
+        of the class's.
+
+        Returns:
+            JSON: JSON object.
+        """
         data = {
             key: value for key, value in vars(self).items()
         }
