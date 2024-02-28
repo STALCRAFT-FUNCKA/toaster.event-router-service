@@ -17,7 +17,7 @@ async def main():
     """Entry point.
     """
     fetcher = Fetcher()
-    fetcher.run()
+    await fetcher.run()
 
 
 
