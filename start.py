@@ -12,7 +12,14 @@ Author:
 import asyncio
 from fetcher import Fetcher
 
-fetcher = Fetcher()
+
+async def main():
+    """Entry point.
+    """
+    fetcher = Fetcher()
+    fetcher.run()
+
+
 
 if __name__ == "__main__":
-    asyncio.run(fetcher.run())
+    asyncio.run(main())
