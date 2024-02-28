@@ -26,7 +26,7 @@ class Fetcher(object):
 
         self.api = self.__session.get_api()
 
-        self.fabricate_event = Router()
+        self.fabricate_event = Fabric()
 
 
     def run(self):
