@@ -13,7 +13,6 @@ from vk_api.bot_longpoll import (
 from client import clsoc
 import config
 from .fabric import Fabric
-from .router import Router
 
 
 class Fetcher(object):
@@ -37,13 +36,10 @@ class Fetcher(object):
         self.api = self.__session.get_api()
 
         self.fabricate_event = Fabric()
-        self.route_event = Router()
+
 
     async def _route(self, event: "BaseEvent"):
-        if not await self.route_event(event):
-            reason = "missing route"
-            log_text = f"Unable to route event <{event.event_id}|{reason}>"
-            await clsoc.log_workstream(config.SERVICE_NAME, log_text)
+        await clsoc.transfer_event(event)
 
 
     async def _fabric(self, event: VkBotEvent) -> "BaseEvent":
