@@ -1,8 +1,10 @@
 """A file containing a description of the bot's main class with all its functions.
 """
+import asyncio
 from vk_api import VkApi
 from vk_api.bot_longpoll import (
-    VkBotLongPoll
+    VkBotLongPoll,
+    VkBotEvent
 )
 from client import clsoc
 import config
@@ -29,6 +31,10 @@ class Fetcher(object):
         self.fabricate_event = Fabric()
 
 
+    async def _fabric(self, event: VkBotEvent) -> "BaseEvent":
+        return self.fabricate_event(event, self.api)
+
+
     def run(self):
         """Starts listening VK longpoll server.
         """
@@ -36,7 +42,7 @@ class Fetcher(object):
         clsoc.log_workstream(config.SERVICE_NAME, log_text)
 
         for vk_event in self.__longpoll.listen():
-            event = self.fabricate_event(vk_event, self.api)
+            event = self._fabric(vk_event)
 
             # TODO: Сделать переброску ивентов в формате JSON на другие сервисы
 
