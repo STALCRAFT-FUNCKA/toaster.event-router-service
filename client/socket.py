@@ -21,9 +21,9 @@ class ClientSocket(object):
     ip_map = {
         "localhost": "127.0.0.1",
         "workstream-logging-service": "172.19.0.5",
-        "toaster.command-handling-service": "",
-        "toaster.message-handling-service": "",
-        "toaster.button-handling-service": "", # TODO: Добавить Ip после поднятия микрух
+        "toaster.command-handling-service": "172.19.0.7",
+        "toaster.message-handling-service": "172.19.0.8",
+        "toaster.button-handling-service": "172.19.0.9", # TODO: Добавить Ip после поднятия микрух
     }
 
     evet_map = {
@@ -70,7 +70,7 @@ class ClientSocket(object):
 
 
     async def transfer_event(self, event: "MessageEvent"):
-        """Sends JSON data to the
+        """Sends event JSON data to the
         event handling microservices.
 
         Args:
