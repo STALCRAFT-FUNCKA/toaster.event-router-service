@@ -4,7 +4,7 @@ About:
     with server sockets of other microservices. Allows
     send data in JSON format.
 """
-import json
+import pickle
 from socket import (
     socket,
     AF_INET,
@@ -87,16 +87,26 @@ class ClientSocket(object):
         client_soc = socket(AF_INET, SOCK_STREAM)
         client_soc.connect(addr)
 
-        json_data = json.dumps(data)
+        bytes_data = self._serialize(data)
 
-        client_soc.sendall(json_data.encode("utf-8"))
+        client_soc.sendall(bytes_data)
         recived = client_soc.recv(1024)
 
         client_soc.close()
 
         # HTTP 202 - accepted
-        if "202" in recived.decode('utf-8'):
+        if "202" in self._deserialize(recived):
             return True
 
         # HTTP 406 - rejected (not accepted)
         return False
+
+
+    @staticmethod
+    def _serialize(obj: object) -> bytes:
+        return pickle.dumps(obj)
+
+
+    @staticmethod
+    def _deserialize(bts: bytes) -> object:
+        return pickle.loads(bts)
