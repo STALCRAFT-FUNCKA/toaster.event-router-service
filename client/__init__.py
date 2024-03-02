@@ -4,10 +4,9 @@ About:
     with server sockets of other microservices. Allows
     send data in JSON format.
 """
-from .socket import ClientSocket
+from .socket import client
 
-clsoc = ClientSocket(7560)
 
 __all__ = (
-    "clsoc",
+    "client",
 )

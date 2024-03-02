@@ -3,6 +3,8 @@ About:
     Service configurations and settings.
 """
 from .config import (
+    QUEUE_BROKER_IP,
+    QUEUE_BROKER_PORT,
     TOKEN,
     GROUP_ID,
     API_VERSION,
@@ -14,6 +16,8 @@ from .config import (
 
 
 __all__ = (
+    "QUEUE_BROKER_IP",
+    "QUEUE_BROKER_PORT",
     "TOKEN",
     "GROUP_ID",
     "API_VERSION",

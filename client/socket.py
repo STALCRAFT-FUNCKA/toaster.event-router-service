@@ -1,105 +1,64 @@
 """Module "cliient".
 About:
-    Provides a client socket class for communication
-    with server sockets of other microservices. Allows
-    send data in JSON format.
+
 """
 import pickle
-from socket import (
-    socket,
-    AF_INET,
-    SOCK_STREAM
-)
+import pika
+import config
 
 
-class ClientSocket(object):
-    """Client socket class.
-    Provides functions for sending logs, as well as sending
-    events after previous routing to the necessary
-    microservices for their subsequent handling.
+
+class Client(object):
     """
-    ip_map = {
-        "localhost": "127.0.0.1",
-        "workstream-logging-service": "172.19.0.5",
-        "toaster.command-handling-service": "172.19.0.7",
-        "toaster.message-handling-service": "172.19.0.8",
-        "toaster.button-handling-service": "172.19.0.9", # TODO: Добавить Ip после поднятия микрух
+    """
+    event_queues = {
+        "command_call": "commands",
+        "message_new": "messages",
+        "button_pressed": "buttons" 
     }
-
-    evet_map = {
-        "command_call": "toaster.message-handling-service",
-        "message_new": "toaster.command-handling-service",
-        "button_pressed": "toaster.button-handling-service"
-    }
-
-    def __init__(self, port: int = 8000):
-        self.port = port
-
-
-    def _get_addr(self, service_name: str):
-        addr = (
-            self.ip_map[service_name],
-            self.port
-        )
-
-        return addr
-
 
     async def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info") -> bool:
-        """Sends byte data to the
-        general logging microservice.
-
-        Args:
-            logger_name (str): Logger name. (Service name)
-            text (str): Log text.
-            logging_lvl (str, optional): Logging level. Defaults to "info".
-
-        Returns:
-            bool: Transfering status.
         """
-        data = {
+        """
+        data = self._serialize({
             "name": logger_name,
             "mode": logging_lvl,
             "text": text
-        }
+        })
 
-        service_name = "workstream-logging-service"
-        #service_name = "localhost"
+        queue = "logs"
 
-        return await self._send_data(data, service_name)
+        return await self._send_data(data, queue)
 
 
     async def transfer_event(self, event: "MessageEvent"):
-        """Sends event byte data to the
-        event handling microservices.
-
-        Args:
-            event (MessageEvent): VK custom message event.
         """
-        # service = self.evet_map.get(event.event_type)
-        # await self._send_data(event.json, service)
-        # TODO: Раскомментить после поднятия микросервиса
+        """
+        queue = self.event_queues.get(event.event_type, "Unknown")
+        data = self._serialize(event)
+
+        if queue != "Unknown":
+            data = self._serialize(event)
+            await self._send_data(data, queue)
 
 
-    async def _send_data(self, data: dict, service_name: str) -> bool:
-        addr = self._get_addr(service_name)
+    async def _send_data(self, data: bytes, queue: str):
+        connection = pika.BlockingConnection(
+            pika.ConnectionParameters(
+                host=config.QUEUE_BROKER_IP,
+                port=config.QUEUE_BROKER_PORT
+            )
+        )
+        channel = connection.channel()
 
-        client_soc = socket(AF_INET, SOCK_STREAM)
-        client_soc.connect(addr)
+        channel.queue_declare(queue=queue, durable=True)
+        channel.basic_publish(
+            exchange='',
+            routing_key=queue,
+            body=self._serialize(data),
+        )
 
-        bytes_data = self._serialize(data)
-
-        client_soc.sendall(bytes_data)
-        recived = client_soc.recv(1024)
-
-        client_soc.close()
-
-        # HTTP 202 - accepted
-        if "202" in self._deserialize(recived):
-            return True
-
-        # HTTP 406 - rejected (not accepted)
-        return False
+        connection.close()
 
 
     @staticmethod
@@ -110,3 +69,7 @@ class ClientSocket(object):
     @staticmethod
     def _deserialize(bts: bytes) -> object:
         return pickle.loads(bts)
+
+
+
+client = Client()

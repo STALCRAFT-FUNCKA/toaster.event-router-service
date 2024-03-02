@@ -6,6 +6,9 @@ import os
 
 SERVICE_NAME = "toaster.event-routing-service"
 
+QUEUE_BROKER_IP = "172.19.0.40"
+QUEUE_BROKER_PORT = 7560
+
 TOKEN: str = os.getenv("TOKEN")
 GROUP_ID: int = int(os.getenv("GROUPID"))
 
