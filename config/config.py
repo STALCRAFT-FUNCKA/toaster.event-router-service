@@ -1,6 +1,4 @@
 """Module "config".
-About:
-    Service configurations and settings.
 """
 import os
 

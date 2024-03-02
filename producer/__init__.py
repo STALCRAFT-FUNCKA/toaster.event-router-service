@@ -1,8 +1,7 @@
-"""Module "cliient".
+"""Module "producer".
 About:
-    Provides a client socket class for communication
-    with server sockets of other microservices. Allows
-    send data in JSON format.
+    Provides a producer client that sends data
+    to rabbit.queue-broker service. Using JSON.
 """
 from .body import producer
 

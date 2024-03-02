@@ -1,8 +1,4 @@
 """Module "fetcher".
-About:
-    A file that describes the fabric
-    class required to create custom
-    event objects.
 """
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent

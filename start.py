@@ -2,8 +2,8 @@
 About:
     A service that listening to VKontakte longpolling server,
     receives events from it, and then forms them
-    custom events, sending json data through the client socket
-    about the event to other processing services.
+    custom events, sending json data through the RabbitMQ
+    to other handling services.
     
 Author:
     Oidaho (Ruslan Bashinskii)

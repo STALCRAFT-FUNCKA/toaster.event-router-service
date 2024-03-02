@@ -1,8 +1,4 @@
 """Module "events".
-About:
-    Provides custom VK events. Convenient form,
-    additional data, nothing superfluous.
-    Base event.
 """
 from vk_api import VkApi
 from tools import (

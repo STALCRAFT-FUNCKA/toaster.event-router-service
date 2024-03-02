@@ -1,6 +1,4 @@
-"""Module "cliient".
-About:
-
+"""Module "producer".
 """
 import json
 import pika
@@ -8,7 +6,9 @@ import config
 
 
 class Producer(object):
-    """
+    """Producer's main class.
+    Describes basic connection methods
+    and sending data to RabbitMQ.
     """
     event_queues = {
         "command_call": "commands",
@@ -16,8 +16,14 @@ class Producer(object):
         "button_pressed": "buttons" 
     }
 
-    async def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info") -> bool:
-        """
+    async def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info"):
+        """A function that provides the ability to send a log
+        to the general logging service via a queue in RabbitMQ.
+
+        Args:
+            logger_name (str): Name of the logger instance.
+            text (str): Log text.
+            logging_lvl (str, optional): Logging lvl. Defaults to "info".
         """
         data = {
             "name": logger_name,
@@ -27,11 +33,15 @@ class Producer(object):
 
         queue = "logs"
 
-        return await self._send_data(data, queue)
+        await self._send_data(data, queue)
 
 
     async def transfer_event(self, event: "MessageEvent"):
-        """
+        """A function that provides the ability to send an event
+        to event handler services via a queue in RabbitMQ.
+
+        Args:
+            event (MessageEvent): Custom vk message event.
         """
         queue = self.event_queues.get(event.event_type, "Unknown")
         data = json.dumps(event.as_dict)

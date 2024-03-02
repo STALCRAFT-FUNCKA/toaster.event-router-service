@@ -1,9 +1,4 @@
 """Module "fetcher".
-About:
-    A file containing a description of
-    the fetcher main class. Fetcher receives
-    data from VK longpoll server by сщььгтшен 
-    access token.
 """
 from vk_api import VkApi
 from vk_api.bot_longpoll import (
