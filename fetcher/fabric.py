@@ -47,7 +47,7 @@ class Fabric(object):
             reason = "missing fabric line."
 
         if reason is not None:
-            log_text = f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped." \
+            log_text = f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped. " \
             f"Reason: {reason}\n"
             await producer.log_workstream(config.SERVICE_NAME, log_text)
 
