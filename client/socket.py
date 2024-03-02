@@ -35,11 +35,11 @@ class Client(object):
         """
         """
         queue = self.event_queues.get(event.event_type, "Unknown")
-        data = event.as_dict
+        data = json.dumps(event.as_dict)
 
         if queue != "Unknown":
-            data = self._serialize(event)
-            await self._send_data(data, queue)
+            encoded = self._serialize(data)
+            await self._send_data(encoded, queue)
 
 
     async def _send_data(self, data: dict, queue: str):

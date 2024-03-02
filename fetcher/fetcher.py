@@ -52,7 +52,7 @@ class Fetcher(object):
         log_text = f"New event recived:\n{event.attr_str}"
         await client.log_workstream(config.SERVICE_NAME, log_text)
 
-        await self._route(event)
+        # await self._route(event)
 
 
     async def run(self):
