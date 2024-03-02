@@ -6,7 +6,7 @@ import config
 
 
 class Producer(object):
-    """Producer's main class.
+    """Producer main class.
     Describes basic connection methods
     and sending data to RabbitMQ.
     """
