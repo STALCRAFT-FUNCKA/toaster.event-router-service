@@ -7,7 +7,7 @@ About:
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
 import config
-from client import client
+from producer import producer
 from events import (
     BaseEvent,
     MessageEvent,
@@ -49,7 +49,7 @@ class Fabric(object):
         if reason is not None:
             log_text = f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped." \
             f"Reason: {reason}\n"
-            await client.log_workstream(config.SERVICE_NAME, log_text)
+            await producer.log_workstream(config.SERVICE_NAME, log_text)
 
             return None
 
