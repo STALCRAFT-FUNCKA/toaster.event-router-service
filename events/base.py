@@ -105,3 +105,18 @@ class BaseEvent(object):
         summary += "-------------------------------------------------"
 
         return summary
+
+
+    @property
+    def as_dict(self):
+        """Returns a JSON representation
+        of the class's.
+        Returns:
+            JSON: JSON object.
+        """
+        data = {
+            key: value for key, value in vars(self).items()
+        }
+        data.pop("_BaseEvent__api")
+
+        return data
