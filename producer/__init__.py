@@ -4,9 +4,9 @@ About:
     with server sockets of other microservices. Allows
     send data in JSON format.
 """
-from .socket import client
+from .body import producer
 
 
 __all__ = (
-    "client",
+    "producer",
 )

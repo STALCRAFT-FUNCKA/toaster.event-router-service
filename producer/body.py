@@ -7,8 +7,7 @@ import pika
 import config
 
 
-
-class Client(object):
+class Producer(object):
     """
     """
     event_queues = {
@@ -73,4 +72,4 @@ class Client(object):
 
 
 
-client = Client()
+producer = Producer()

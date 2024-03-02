@@ -10,7 +10,7 @@ from tools import (
     msk_now
 )
 import config
-from client import client
+from producer import producer
 
 
 class BaseEvent(object):
@@ -49,7 +49,7 @@ class BaseEvent(object):
             log_text = "Unable to obtain user information." \
                        "Bot don't have administrator rights or" \
                        "user doesn't exist."
-            client.log_workstream(config.SERVICE_NAME, log_text)
+            producer.log_workstream(config.SERVICE_NAME, log_text)
 
         else:
             user_info = user_info[0]
@@ -67,7 +67,7 @@ class BaseEvent(object):
             log_text = "Unable to obtain conversation information." \
                        "Bot don't have administrator rights or" \
                        "conversation doesn't exist."
-            client.log_workstream(config.SERVICE_NAME, log_text)
+            producer.log_workstream(config.SERVICE_NAME, log_text)
 
         else:
             peer_info = peer_info["items"][0]["chat_settings"]

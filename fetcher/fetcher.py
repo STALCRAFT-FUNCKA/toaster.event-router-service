@@ -10,7 +10,7 @@ from vk_api.bot_longpoll import (
     VkBotLongPoll,
     VkBotEvent
 )
-from client import client
+from producer import producer
 import config
 from .fabric import Fabric
 
@@ -39,7 +39,7 @@ class Fetcher(object):
 
 
     async def _route(self, event: "BaseEvent"):
-        await client.transfer_event(event)
+        await producer.transfer_event(event)
 
 
     async def _fabric(self, event: VkBotEvent) -> "BaseEvent":
@@ -49,10 +49,12 @@ class Fetcher(object):
     async def _handle(self, event: VkBotEvent):
         event = await self._fabric(event)
 
-        log_text = f"New event recived:\n{event.attr_str}"
-        await client.log_workstream(config.SERVICE_NAME, log_text)
+        if event is not None:
+            log_text = f"New event recived:\n{event.attr_str}"
+            await producer.log_workstream(config.SERVICE_NAME, log_text)
 
-        # await self._route(event)
+            # await self._route(event)
+            #TODO: Enable later
 
 
     async def run(self):
@@ -63,7 +65,7 @@ class Fetcher(object):
         instances from raw JSON data.
         """
         log_text = "Starting listening longpoll server..."
-        await client.log_workstream(config.SERVICE_NAME, log_text)
+        await producer.log_workstream(config.SERVICE_NAME, log_text)
 
         for vk_event in self.__longpoll.listen():
             await self._handle(vk_event)
