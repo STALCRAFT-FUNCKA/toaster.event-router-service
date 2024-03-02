@@ -65,8 +65,7 @@ All documenting information is duplicated within the code in English.<br>
     {
         "ts": 1709107923,
         "datetime": "2024-02-28 11:12:03",
-        "event_type": 
-        "message_new", 
+        "event_type": "message_new", 
         "event_id": "8dd52b4d7c822b78db23db85bf351c7114e46b36", 
         "user_id": 206295116, 
         "user_name": "Руслан Башинский", 
