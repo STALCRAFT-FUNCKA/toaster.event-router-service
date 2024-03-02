@@ -46,7 +46,7 @@ class ClientSocket(object):
 
 
     async def log_workstream(self, logger_name: str, text:str , logging_lvl: str = "info") -> bool:
-        """Sends JSON data to the
+        """Sends byte data to the
         general logging microservice.
 
         Args:
@@ -70,7 +70,7 @@ class ClientSocket(object):
 
 
     async def transfer_event(self, event: "MessageEvent"):
-        """Sends event JSON data to the
+        """Sends event byte data to the
         event handling microservices.
 
         Args:
