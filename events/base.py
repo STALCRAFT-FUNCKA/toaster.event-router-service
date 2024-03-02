@@ -4,14 +4,13 @@ About:
     additional data, nothing superfluous.
     Base event.
 """
-import json
 from vk_api import VkApi
 from tools import (
     timestamp,
     msk_now
 )
 import config
-from client import clsoc
+from client import client
 
 
 class BaseEvent(object):
@@ -50,7 +49,7 @@ class BaseEvent(object):
             log_text = "Unable to obtain user information." \
                        "Bot don't have administrator rights or" \
                        "user doesn't exist."
-            clsoc.log_workstream(config.SERVICE_NAME, log_text)
+            client.log_workstream(config.SERVICE_NAME, log_text)
 
         else:
             user_info = user_info[0]
@@ -68,7 +67,7 @@ class BaseEvent(object):
             log_text = "Unable to obtain conversation information." \
                        "Bot don't have administrator rights or" \
                        "conversation doesn't exist."
-            clsoc.log_workstream(config.SERVICE_NAME, log_text)
+            client.log_workstream(config.SERVICE_NAME, log_text)
 
         else:
             peer_info = peer_info["items"][0]["chat_settings"]

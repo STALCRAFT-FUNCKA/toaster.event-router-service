@@ -45,8 +45,7 @@ class Client(object):
     async def _send_data(self, data: bytes, queue: str):
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(
-                host=config.QUEUE_BROKER_IP,
-                port=config.QUEUE_BROKER_PORT
+                host=config.QUEUE_BROKER_IP
             )
         )
         channel = connection.channel()
