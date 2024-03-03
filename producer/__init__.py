@@ -3,7 +3,7 @@ About:
     Provides a producer client that sends data
     to rabbit.queue-broker service. Using JSON.
 """
-from .body import producer
+from .custom import producer
 
 
 __all__ = (
