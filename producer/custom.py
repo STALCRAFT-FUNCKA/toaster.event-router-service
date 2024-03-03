@@ -4,9 +4,9 @@ from .body import Producer
 
 class CustomProducer(Producer):
     """Custom producer class.
-    preferences for implimentation of custom
+    Preferences for implimentation of custom
     functions for working with data that needs
-    to be edited in a queue inside RabbitMQ.
+    to be pushed into a queue inside RabbitMQ.
     """
     event_queues = {
         "command_call": "commands",
