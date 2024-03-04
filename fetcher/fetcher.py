@@ -7,6 +7,7 @@ from vk_api.bot_longpoll import (
 )
 from producer import producer
 import config
+from logger import logger
 from .fabric import Fabric
 
 
@@ -46,7 +47,7 @@ class Fetcher(object):
 
         if event is not None:
             log_text = f"New event recived:\n{event.attr_str}"
-            await producer.log_workstream(config.SERVICE_NAME, log_text)
+            await logger.info(log_text)
 
             # await self._route(event)
             #TODO: Enable later
@@ -60,7 +61,11 @@ class Fetcher(object):
         instances from raw JSON data.
         """
         log_text = "Starting listening longpoll server..."
-        await producer.log_workstream(config.SERVICE_NAME, log_text)
+        await logger.info(log_text)
 
         for vk_event in self.__longpoll.listen():
             await self._handle(vk_event)
+
+
+
+fetcher = Fetcher()

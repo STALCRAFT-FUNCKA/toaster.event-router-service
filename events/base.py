@@ -5,8 +5,7 @@ from tools import (
     timestamp,
     msk_now
 )
-import config
-from producer import producer
+from logger import logger
 
 
 class BaseEvent(object):
@@ -45,7 +44,7 @@ class BaseEvent(object):
             log_text = "Unable to obtain user information." \
                        "Bot don't have administrator rights or" \
                        "user doesn't exist."
-            producer.log_workstream(config.SERVICE_NAME, log_text)
+            logger.info(log_text)
 
         else:
             user_info = user_info[0]
@@ -63,7 +62,7 @@ class BaseEvent(object):
             log_text = "Unable to obtain conversation information." \
                        "Bot don't have administrator rights or" \
                        "conversation doesn't exist."
-            producer.log_workstream(config.SERVICE_NAME, log_text)
+            logger.info(log_text)
 
         else:
             peer_info = peer_info["items"][0]["chat_settings"]
@@ -84,7 +83,7 @@ class BaseEvent(object):
     @property
     def attr_str(self) -> str:
         """Returns a string representation of the class's. 
-        Attribute dictionary in a convenient form.
+        Attributes as text in a convenient form.
         
         Returns:
             str: Data represintation.
@@ -104,11 +103,11 @@ class BaseEvent(object):
 
 
     @property
-    def as_dict(self):
-        """Returns a JSON representation
+    def as_dict(self) -> dict:
+        """Returns a dict representation
         of the class's.
         Returns:
-            JSON: JSON object.
+            dict: Dict object.
         """
         data = {
             key: value for key, value in vars(self).items()
