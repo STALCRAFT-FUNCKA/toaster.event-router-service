@@ -14,7 +14,7 @@ class Logger(LoggingFormatters):
     def __init__(self):
         self._setup_logger(
             name=config.SERVICE_NAME,
-            date=msk_now
+            date=msk_now()
         )
 
 
