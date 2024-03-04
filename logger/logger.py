@@ -21,6 +21,9 @@ class Logger(LoggingFormatters):
     def _setup_logger(self, name:str, date: str):
         self.logger = logging.getLogger(name)
 
+        date = date.replace("-", ".")
+        date = date.replace(":", "-")
+
         stream_handler = logging.StreamHandler()
         file_handler = logging.FileHandler(
             filename="./logs/" + date + ".log",
