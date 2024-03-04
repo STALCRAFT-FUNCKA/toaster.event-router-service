@@ -72,7 +72,8 @@ class BaseEvent(object):
 
     @property
     def api(self):
-        """Returns the VKontakte API object from the parent class.
+        """Returns the VKontakte API 
+        object from the parent class.
 
         Returns:
             VkApi: vk api object.
