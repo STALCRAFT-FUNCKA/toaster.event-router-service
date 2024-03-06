@@ -17,7 +17,7 @@ class Producer(object):
             )
         )
         channel = connection.channel()
-        print(data)
+
         json_string = json.dumps(data)
 
         channel.queue_declare(queue=queue, durable=True)
