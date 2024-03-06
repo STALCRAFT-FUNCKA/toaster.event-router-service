@@ -12,8 +12,8 @@ class CustomProducer(Producer):
     """
     event_queues = {
         "command_call": "commands",
-        "message_new": "messages",
-        "button_pressed": "buttons" 
+        #"message_new": "messages",
+        #"button_pressed": "buttons" #TODO: enable later
     }
 
     async def transfer_event(self, event: "MessageEvent"):
