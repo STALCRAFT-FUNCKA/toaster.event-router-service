@@ -109,9 +109,9 @@ All documenting information is duplicated within the code in English.<br>
 ### Дополнительно
 
     docker network
-        name: FUNCKA
-        ip_gateway: 172.19.0.1
-        subnet: 172.19.0.0/16
+        name: TOASTER
+        ip_gateway: 172.18.0.1
+        subnet: 172.18.0.0/16
         driver: bridge
     
 
@@ -124,7 +124,10 @@ All documenting information is duplicated within the code in English.<br>
 
     docker container
         name: toaster.event-routing-service
-        network_ip: 172.19.0.6
+        network_ip: 172.1.08.6
+    s
+    docker volumes:
+        /var/log/TOASTER/toaster.event-routing-service:/service/logs
         
 
 *Дополнительная информация, которая может пригодиться для поднятия сервиса внутри инфраструктуры.
