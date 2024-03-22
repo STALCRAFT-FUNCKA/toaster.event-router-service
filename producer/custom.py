@@ -12,7 +12,7 @@ class CustomProducer(Producer):
     """
     event_queues = {
         "command_call": "commands",
-        "message_new": "messages",
+        # "message_new": "messages",
         "button_pressed": "buttons" 
     }
 
@@ -28,7 +28,7 @@ class CustomProducer(Producer):
 
         if queue != "Unknown":
             encoded = self._serialize(data)
-            await self._send_data(encoded, queue)\
+            await self._send_data(encoded, queue)
 
 
 
