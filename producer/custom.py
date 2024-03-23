@@ -11,7 +11,7 @@ class CustomProducer(Producer):
     """
     event_queues = {
         "command_call": "commands",
-        # "message_new": "messages",
+        "message_new": "messages",
         "button_pressed": "buttons" 
     }
 
