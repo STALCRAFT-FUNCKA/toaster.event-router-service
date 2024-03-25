@@ -2,7 +2,7 @@
 
 ![drt98l](https://github.com/STALCRAFT-FUNCKA/toaster.event-routing-service/assets/76991612/08409484-c9b2-41f3-9b40-8e43614f0661)
 
-Все документпирующая информация продублированна внутри кода на английском языке.<br>
+Вся документирующая информация продублированна внутри кода на английском языке.<br>
 All documenting information is duplicated within the code in English.<br>
 
 
@@ -102,9 +102,8 @@ All documenting information is duplicated within the code in English.<br>
     }
 
 
-После исполнения всех преобразований, сервис отправляет событие, в зависимости от некоторых условий, на сервисы обработки данных событий.
+После исполнения всех преобразований, сервис отправляет событие, в зависимости от некоторых условий, на сервисы обработки соответствующих событий.
 
-Дополнительно, параллельно ко всем процессам, сервис логирует свои действия, отправляя данные на workstream-logging-service.
 
 ### Дополнительно
 
@@ -124,7 +123,7 @@ All documenting information is duplicated within the code in English.<br>
 
     docker container
         name: toaster.event-routing-service
-        network_ip: 172.1.08.6
+        network_ip: 172.1.08.5
     s
     docker volumes:
         /var/log/TOASTER/toaster.event-routing-service:/service/logs
