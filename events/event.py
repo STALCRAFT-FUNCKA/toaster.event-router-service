@@ -63,7 +63,11 @@ class MessageEvent(BaseEvent):
             attachment.get("type") for attachment in message.get("attachments")
         ]
         if message.get("geo"):
-            self.attachments.append("geo")
+            self.attachments.append("Geo")
+        if self.reply:
+            self.attachments.append("Reply")
+        if self.forward:
+            self.attachments.append("Forward")
 
 
 
