@@ -124,7 +124,7 @@ All documenting information is duplicated within the code in English.<br>
     docker container
         name: toaster.event-routing-service
         network_ip: 172.1.08.5
-    s
+
     docker volumes:
         /var/log/TOASTER/toaster.event-routing-service:/service/logs
         
