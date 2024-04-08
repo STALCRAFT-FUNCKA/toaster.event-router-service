@@ -1,5 +1,5 @@
-"""Module "producer".
-"""
+"""Module "producer"."""
+
 import json
 import pika
 import config
@@ -10,11 +10,10 @@ class Producer(object):
     Describes basic connection methods
     and sending data to RabbitMQ.
     """
+
     async def _send_data(self, data: dict, queue: str):
         connection = pika.BlockingConnection(
-            pika.ConnectionParameters(
-                host=config.QUEUE_BROKER_IP
-            )
+            pika.ConnectionParameters(host=config.QUEUE_BROKER_IP)
         )
         channel = connection.channel()
 
@@ -22,18 +21,16 @@ class Producer(object):
 
         channel.queue_declare(queue=queue, durable=True)
         channel.basic_publish(
-            exchange='',
+            exchange="",
             routing_key=queue,
             body=self._serialize(json_string),
         )
 
         connection.close()
 
-
     @staticmethod
     def _serialize(string: str) -> bytes:
         return string.encode("utf-8")
-
 
     @staticmethod
     def _deserialize(byte_string: bytes) -> str:

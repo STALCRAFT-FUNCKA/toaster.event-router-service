@@ -1,13 +1,13 @@
-"""Module "events".
-"""
+"""Module "events"."""
+
 from vk_api import VkApi
 import config
 from .base import BaseEvent
 
 
 class MessageEvent(BaseEvent):
-    """Custom message event.
-    """
+    """Custom message event."""
+
     # user data
     user_id: int
     user_name: str
@@ -20,7 +20,7 @@ class MessageEvent(BaseEvent):
 
     # message data
     cmid: int
-    text: str #TODO: addtext validating (Optional)
+    text: str  # TODO: addtext validating (Optional)
     reply: dict
     forward: list
     attachments: list
@@ -36,23 +36,17 @@ class MessageEvent(BaseEvent):
         if self.text.startswith(config.COMMAND_PREFIXES):
             self.event_type = "command_call"
 
-
     def _get_userdata(self, message: dict):
         self.user_id = message.get("from_id")
         info = self._get_userinfo(self.user_id)
-        self.user_name = " ".join([
-                info.get("first_name"),
-                info.get("last_name")
-            ])
+        self.user_name = " ".join([info.get("first_name"), info.get("last_name")])
         self.user_nick = info.get("domain")
-
 
     def _get_peerdata(self, message: dict):
         self.peer_id = message.get("peer_id")
         info = self._get_peerinfo(self.peer_id)
         self.peer_name = info.get("title")
         self.chat_id = self.peer_id - config.VK_GROUP_ID_DELAY
-
 
     def _get_messagedata(self, message: dict):
         self.cmid = message.get("conversation_message_id")
@@ -70,10 +64,9 @@ class MessageEvent(BaseEvent):
             self.attachments.append("forward")
 
 
-
 class ButtonEvent(BaseEvent):
-    """Custom button event.
-    """
+    """Custom button event."""
+
     # user data
     user_id: int
     user_name: str
@@ -85,7 +78,7 @@ class ButtonEvent(BaseEvent):
     chat_id: int
 
     # button data
-    cmid : int
+    cmid: int
     button_event_id: str
     payload: dict
 
@@ -98,23 +91,17 @@ class ButtonEvent(BaseEvent):
         self._get_peerdata(message)
         self._get_buttondata(message)
 
-
     def _get_userdata(self, message: dict):
         self.user_id = message.get("user_id")
         info = self._get_userinfo(self.user_id)
-        self.user_name = " ".join([
-                info.get("first_name"),
-                info.get("last_name")
-            ])
+        self.user_name = " ".join([info.get("first_name"), info.get("last_name")])
         self.user_nick = info.get("domain")
-
 
     def _get_peerdata(self, message: dict):
         self.peer_id = message.get("peer_id")
         info = self._get_peerinfo(self.peer_id)
         self.peer_name = info.get("title")
         self.chat_id = self.peer_id - config.VK_GROUP_ID_DELAY
-
 
     def _get_buttondata(self, message: dict):
         self.cmid = message.get("conversation_message_id")

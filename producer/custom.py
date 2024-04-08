@@ -1,5 +1,5 @@
-"""Module "producer".
-"""
+"""Module "producer"."""
+
 from .body import Producer
 
 
@@ -9,13 +9,14 @@ class CustomProducer(Producer):
     functions for working with data that needs
     to be pushed into a queue inside RabbitMQ.
     """
+
     event_queues = {
         "command_call": "commands",
         "message_new": "messages",
-        "button_pressed": "buttons" 
+        "button_pressed": "buttons",
     }
 
-    async def transfer_event(self, event: "MessageEvent"):
+    async def transfer_event(self, event):
         """A function that provides the ability to send an event
         to event handler services via a queue in RabbitMQ.
 
@@ -27,7 +28,6 @@ class CustomProducer(Producer):
 
         if queue != "Unknown":
             await self._send_data(data, queue)
-
 
 
 producer = CustomProducer()

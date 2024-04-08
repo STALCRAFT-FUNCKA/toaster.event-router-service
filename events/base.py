@@ -1,10 +1,7 @@
-"""Module "events".
-"""
+"""Module "events"."""
+
 from vk_api import VkApi
-from tools import (
-    timestamp,
-    msk_now
-)
+from tools import timestamp, msk_now
 from logger import logger
 
 
@@ -12,6 +9,7 @@ class BaseEvent(object):
     """Custom description of an event
     coming from a longpoll server.
     """
+
     # VK api object
     # It is necessary for receipt
     # an additional data of the events
@@ -32,18 +30,16 @@ class BaseEvent(object):
 
         self.__api = api
 
-
     def _get_userinfo(self, user_id: int):
-        user_info = self.api.users.get(
-            user_ids=user_id,
-            fields=["domain"]
-        )
+        user_info = self.api.users.get(user_ids=user_id, fields=["domain"])
 
         if not user_info:
             user_info = {}
-            log_text = "Unable to obtain user information." \
-                       "Bot don't have administrator rights or" \
-                       "user doesn't exist."
+            log_text = (
+                "Unable to obtain user information."
+                "Bot don't have administrator rights or"
+                "user doesn't exist."
+            )
             logger.info(log_text)
 
         else:
@@ -51,17 +47,16 @@ class BaseEvent(object):
 
         return user_info
 
-
     def _get_peerinfo(self, peer_id: int):
-        peer_info = self.api.messages.getConversationsById(
-            peer_ids=peer_id
-        )
+        peer_info = self.api.messages.getConversationsById(peer_ids=peer_id)
 
         if peer_info.get("count") == 0:
             peer_info = {}
-            log_text = "Unable to obtain conversation information." \
-                       "Bot don't have administrator rights or" \
-                       "conversation doesn't exist."
+            log_text = (
+                "Unable to obtain conversation information."
+                "Bot don't have administrator rights or"
+                "conversation doesn't exist."
+            )
             logger.info(log_text)
 
         else:
@@ -69,10 +64,9 @@ class BaseEvent(object):
 
         return peer_info
 
-
     @property
     def api(self):
-        """Returns the VKontakte API 
+        """Returns the VKontakte API
         object from the parent class.
 
         Returns:
@@ -80,18 +74,15 @@ class BaseEvent(object):
         """
         return self.__api
 
-
     @property
     def attr_str(self) -> str:
-        """Returns a string representation of the class's. 
+        """Returns a string representation of the class's.
         Attributes as text in a convenient form.
-        
+
         Returns:
             str: Data represintation.
         """
-        blacklisted_keys = (
-            "_BaseEvent__api",
-        )
+        blacklisted_keys = ("_BaseEvent__api",)
 
         summary = ""
 
@@ -102,7 +93,6 @@ class BaseEvent(object):
 
         return summary
 
-
     @property
     def as_dict(self) -> dict:
         """Returns a dict representation
@@ -110,9 +100,7 @@ class BaseEvent(object):
         Returns:
             dict: Dict object.
         """
-        data = {
-            key: value for key, value in vars(self).items()
-        }
+        data = {key: value for key, value in vars(self).items()}
         data.pop("_BaseEvent__api")
 
         return data

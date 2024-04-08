@@ -2,6 +2,7 @@
 About:
     Service configurations and settings.
 """
+
 from .config import (
     QUEUE_BROKER_IP,
     TOKEN,
@@ -10,7 +11,7 @@ from .config import (
     LONGPOLL_REQUEST_TD,
     SERVICE_NAME,
     VK_GROUP_ID_DELAY,
-    COMMAND_PREFIXES
+    COMMAND_PREFIXES,
 )
 
 
@@ -22,5 +23,5 @@ __all__ = (
     "LONGPOLL_REQUEST_TD",
     "SERVICE_NAME",
     "VK_GROUP_ID_DELAY",
-    "COMMAND_PREFIXES"
+    "COMMAND_PREFIXES",
 )

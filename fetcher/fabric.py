@@ -1,13 +1,9 @@
-"""Module "fetcher".
-"""
+"""Module "fetcher"."""
+
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
 from logger import logger
-from events import (
-    BaseEvent,
-    MessageEvent,
-    ButtonEvent
-)
+from events import BaseEvent, MessageEvent, ButtonEvent
 
 
 class Fabric(object):
@@ -21,10 +17,8 @@ class Fabric(object):
     Returns:
         CustomEvent: Custom event
     """
-    _fabric_lines = {
-        "message_new": MessageEvent,
-        "message_event": ButtonEvent
-    }
+
+    _fabric_lines = {"message_new": MessageEvent, "message_event": ButtonEvent}
 
     async def _handle(self, raw_event: dict, api: VkApi) -> BaseEvent:
         """The function determines the type of raw event,
@@ -42,14 +36,15 @@ class Fabric(object):
             reason = "missing fabric line."
 
         if reason is not None:
-            log_text = f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped. " \
-            f"Reason: {reason}\n"
+            log_text = (
+                f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped. "
+                f"Reason: {reason}\n"
+            )
             await logger.info(log_text)
 
             return None
 
         return self._fabric_lines[raw_event.get("type")](raw_event, api)
-
 
     async def __call__(self, vk_event: VkBotEvent, api: VkApi) -> BaseEvent:
         return await self._handle(vk_event.raw, api)
