@@ -23,15 +23,15 @@ class Producer(object):
         channel.basic_publish(
             exchange="",
             routing_key=queue,
-            body=self._serialize(json_string),
+            body=await self._serialize(json_string),
         )
 
         connection.close()
 
     @staticmethod
-    def _serialize(string: str) -> bytes:
+    async def _serialize(string: str) -> bytes:
         return string.encode("utf-8")
 
     @staticmethod
-    def _deserialize(byte_string: bytes) -> str:
+    async def _deserialize(byte_string: bytes) -> str:
         return byte_string.decode("utf-8")
