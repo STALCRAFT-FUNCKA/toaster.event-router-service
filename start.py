@@ -6,7 +6,7 @@ About:
     to other handling services.
 
 Author:
-    Oidaho (Ruslan Bashinskii)
+    Oidaho (Ruslan Bashinsky)
     oidahomain@gmail.com
 """
 
