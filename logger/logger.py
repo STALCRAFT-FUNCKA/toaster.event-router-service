@@ -22,13 +22,7 @@ class Logger(object, metaclass=Singleton):
     """
 
     def __init__(self):
-        self._setup_logger(name=config.SERVICE_NAME, date=msk_now())
-
-    def _setup_logger(self, name: str, date: str):
-        self.logger = logging.getLogger(name)
-
-        date = date.replace("-", ".")
-        date = date.replace(":", "-")
+        self.logger = logging.getLogger(config.SERVICE_NAME)
 
         stream_handler = logging.StreamHandler()
         stream_handler.setFormatter(get_formatter(colored=True))
