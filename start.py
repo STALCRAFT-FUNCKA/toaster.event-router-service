@@ -13,7 +13,7 @@ Author:
 from fetcher import Fetcher
 
 
-async def main():
+def main():
     """Entry point."""
     fetcher = Fetcher()
     fetcher.run()
