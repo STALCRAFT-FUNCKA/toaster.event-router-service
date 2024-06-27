@@ -36,7 +36,7 @@ class Fetcher(object):
             # event = self.__fabric(vk_event, self.api)
             event = vk_event
             if event is not None:
-                self.__logger.info(f"New event recived:\n{event.attr_str}")
+                self.__logger.info(f"New event recived:\n{1}")
                 self.__broker.publish(
                     obj=event,
                     channel_name="test",
