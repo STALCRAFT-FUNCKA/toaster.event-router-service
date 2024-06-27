@@ -1,7 +1,6 @@
-"""Module "producer".
+"""Module "broker".
 About:
-    Provides a producer client that sends data
-    to rabbit.queue-broker service. Using JSON.
+    ...
 """
 
 from .publisher import Publisher
