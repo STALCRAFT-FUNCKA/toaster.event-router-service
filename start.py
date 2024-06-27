@@ -10,15 +10,14 @@ Author:
     oidahomain@gmail.com
 """
 
-import asyncio
 from fetcher import Fetcher
 
 
 async def main():
     """Entry point."""
     fetcher = Fetcher()
-    await fetcher.run()
+    fetcher.run()
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
