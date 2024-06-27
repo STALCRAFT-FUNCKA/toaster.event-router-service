@@ -4,13 +4,12 @@ import logging
 from colorama import Fore
 
 
-def get_formatter(self, colored: bool):
+def get_formatter(colored: bool):
     """DOCSTRING"""
 
-    return self.__colored() if colored else self.__mono()
+    return __colored() if colored else __mono()
 
 
-@staticmethod
 def __colored():
     formatter = logging.Formatter(
         Fore.RED
@@ -22,7 +21,6 @@ def __colored():
     return formatter
 
 
-@staticmethod
 def __mono():
     formatter = logging.Formatter(
         "[ %(name)s | %(levelname)s | %(asctime)s ] " + "Message: %(message)s"
