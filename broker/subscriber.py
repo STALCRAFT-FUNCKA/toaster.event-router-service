@@ -1,3 +1,5 @@
+"""Module "broker"."""
+
 from redis import Redis
 import config
 import pickle
@@ -22,5 +24,5 @@ class Subscriber(object):
                 yield self.__deserialize(event.get("data"))
 
     @staticmethod
-    async def __deserialize(data: bytes) -> object:
+    def __deserialize(data: bytes) -> object:
         return pickle.loads(data=data)
