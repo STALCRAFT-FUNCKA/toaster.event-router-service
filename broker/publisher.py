@@ -24,5 +24,4 @@ class Publisher(object):
 
     @staticmethod
     def __serialize(obj: object) -> bytes:
-        print(f"pickle: {pickle}")
         return pickle.dumps(obj=obj, protocol=pickle.HIGHEST_PROTOCOL)
