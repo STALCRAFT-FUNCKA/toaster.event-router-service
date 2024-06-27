@@ -1,7 +1,6 @@
 """Module "events"."""
 
 from vk_api import VkApi
-from tools import timestamp, msk_now
 from logger import logger
 
 
@@ -17,14 +16,11 @@ class BaseEvent(object):
     _api: VkApi = None
 
     # Event data
-    ts: int = None
-    datetime: str = None
     event_id: str = None
     event_type: str = None
+    additionals: list = []
 
     def __init__(self, raw_event: dict, api: VkApi):
-        self.ts = timestamp()
-        self.datetime = msk_now()
         self.event_type = raw_event.get("type")
         self.event_id = raw_event.get("event_id")
 
