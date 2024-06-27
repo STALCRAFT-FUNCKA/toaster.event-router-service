@@ -33,10 +33,11 @@ class Fetcher(object):
         self.__logger.info("Starting listening longpoll server...")
 
         for vk_event in self._longpoll.listen():
-            event = self.__fabric(vk_event, self.api)
+            # event = self.__fabric(vk_event, self.api)
+            event = vk_event
             if event is not None:
                 self.__logger.info(f"New event recived:\n{str(event)}")
-                self.__broker.publish(
-                    obj=event,
-                    channel_name="test",
-                )
+                # self.__broker.publish(
+                #     obj=event,
+                #     channel_name="test",
+                # )
