@@ -23,5 +23,5 @@ class Publisher(object):
         return status
 
     @staticmethod
-    def __serialize(obj: object) -> str:
+    def __serialize(obj: object) -> bytes:
         return pickle.dumps(obj=obj, protocol=pickle.HIGHEST_PROTOCOL)
