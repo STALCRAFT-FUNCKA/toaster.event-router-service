@@ -2,25 +2,18 @@
 
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
-from logger import logger
 from events import BaseEvent, MessageEvent, ButtonEvent
 
 
 class Fabric(object):
-    """A router class that creates custom events
-    according to the type of raw event.
+    """DOCSTRING"""
 
-    Args:
-        raw_event (Event): vk longpoll event.
-        api (VkApi): vk api object.
+    _routes = {
+        "message_new": MessageEvent,
+        "message_event": ButtonEvent,
+    }
 
-    Returns:
-        CustomEvent: Custom event
-    """
-
-    _fabric_lines = {"message_new": MessageEvent, "message_event": ButtonEvent}
-
-    async def _handle(self, raw_event: dict, api: VkApi) -> BaseEvent:
+    def __handle(self, raw_event: dict, api: VkApi) -> BaseEvent | None:
         """The function determines the type of raw event,
         and then routes it to the desired custom event for subsequent redefinition.
 
@@ -31,20 +24,11 @@ class Fabric(object):
         Returns:
             CustomEvent: Custom event object.
         """
-        reason = None
-        if raw_event.get("type") not in self._fabric_lines:
-            reason = "missing fabric line."
-
-        if reason is not None:
-            log_text = (
-                f"Event <{raw_event.get('event_id')}|{raw_event.get('type')}> skipped. "
-                f"Reason: {reason}\n"
-            )
-            await logger.info(log_text)
-
+        if raw_event.get("type") not in self._routes:
             return None
 
-        return self._fabric_lines[raw_event.get("type")](raw_event, api)
+        return self._routes[raw_event.get("type")](raw_event)
 
-    async def __call__(self, vk_event: VkBotEvent, api: VkApi) -> BaseEvent:
-        return await self._handle(vk_event.raw, api)
+    def __call__(self, vk_event: VkBotEvent, api: VkApi) -> BaseEvent:
+        self.api
+        return self.__handle(vk_event.raw, api)

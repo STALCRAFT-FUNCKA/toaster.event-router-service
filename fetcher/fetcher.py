@@ -13,6 +13,7 @@ class Fetcher(object):
 
     __logger = Logger()
     __broker = Publisher()
+    __fabric = Fabric()
 
     def __init__(self):
         self._session = VkApi(
@@ -24,9 +25,7 @@ class Fetcher(object):
             wait=config.LONGPOLL_REQUEST_TD,
             group_id=config.GROUP_ID,
         )
-
         self.api = self._session.get_api()
-        self.fabricate_event = Fabric()
 
     def run(self):
         """Starts listening VK longpoll server."""
@@ -34,7 +33,8 @@ class Fetcher(object):
         self.__logger.info("Starting listening longpoll server...")
 
         for vk_event in self._longpoll.listen():
-            event = self.fabricate_event(vk_event, self.api)
+            # event = self.__fabric(vk_event, self.api)
+            event = vk_event
             if event is not None:
                 self.__logger.info(f"New event recived:\n{event.attr_str}")
                 self.__broker.publish(
