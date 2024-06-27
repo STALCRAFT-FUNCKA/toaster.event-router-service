@@ -3,10 +3,10 @@
 import logging
 import config
 from tools import msk_now
-from .formatters import LoggingFormatters
+from .formatters import get_formatter
 
 
-class Logger(LoggingFormatters):
+class Logger(object):
     """Logger class, creator of a new instance,
     Let's start registering. Provides basic
     logging functionality.
@@ -22,16 +22,9 @@ class Logger(LoggingFormatters):
         date = date.replace(":", "-")
 
         stream_handler = logging.StreamHandler()
-        file_handler = logging.FileHandler(
-            filename="./logs/" + date + ".log", encoding="utf-8", mode="w"
-        )
-
-        stream_handler.setFormatter(self.get_formatter_colored("red"))
-        file_handler.setFormatter(self.get_formatter())
+        stream_handler.setFormatter(get_formatter(colored=True))
 
         self.logger.addHandler(stream_handler)
-        self.logger.addHandler(file_handler)
-
         self.logger.setLevel(logging.DEBUG)
 
     async def info(self, text: str):
