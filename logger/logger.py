@@ -2,7 +2,6 @@
 
 import logging
 import config
-from tools import msk_now
 from .formatters import get_formatter
 
 
