@@ -7,6 +7,7 @@ SERVICE_NAME = "toaster-dev.event-routing-service"
 BROKER_ADDR = "172.18.0.40"
 
 TOKEN: str = os.getenv("TOKEN")
+GROUP_ID: int = int(os.getenv("GROUPID"))
 
 API_VERSION: str = "5.199"
 LONGPOLL_REQUEST_TD: int = 10

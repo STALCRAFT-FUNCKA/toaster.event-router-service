@@ -11,6 +11,7 @@ from .config import (
     SERVICE_NAME,
     VK_GROUP_ID_DELAY,
     COMMAND_PREFIXES,
+    GROUP_ID,
 )
 
 
@@ -22,4 +23,5 @@ __all__ = (
     "SERVICE_NAME",
     "VK_GROUP_ID_DELAY",
     "COMMAND_PREFIXES",
+    "GROUP_ID",
 )
