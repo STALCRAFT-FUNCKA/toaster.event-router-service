@@ -5,14 +5,8 @@ from colorama import Fore
 
 
 def get_formatter(self, colored: bool):
-    """Provides a formatter with color\mono output.
+    """DOCSTRING"""
 
-    Args:
-        colored (boold): Colored/Mono switch.
-
-    Returns:
-        Formatter: Formatter object for the logger.
-    """
     return self.__colored() if colored else self.__mono()
 
 

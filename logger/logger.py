@@ -36,7 +36,7 @@ class Logger(object, metaclass=Singleton):
         self.logger.addHandler(stream_handler)
         self.logger.setLevel(logging.DEBUG)
 
-    async def info(self, text: str):
+    def info(self, text: str):
         """Logs a message as info.
 
         Args:
@@ -44,7 +44,7 @@ class Logger(object, metaclass=Singleton):
         """
         self.logger.info(text)
 
-    async def debug(self, text: str):
+    def debug(self, text: str):
         """Logs a message as debug.
 
         Args:
@@ -52,7 +52,7 @@ class Logger(object, metaclass=Singleton):
         """
         self.logger.debug(text)
 
-    async def warning(self, text: str):
+    def warning(self, text: str):
         """Logs a message as warning.
 
         Args:
@@ -60,7 +60,7 @@ class Logger(object, metaclass=Singleton):
         """
         self.logger.warning(text)
 
-    async def error(self, text: str):
+    def error(self, text: str):
         """Logs a message as error.
 
         Args:
@@ -68,7 +68,7 @@ class Logger(object, metaclass=Singleton):
         """
         self.logger.error(text)
 
-    async def critical(self, text: str):
+    def critical(self, text: str):
         """Logs a message as critical.
 
         Args:
