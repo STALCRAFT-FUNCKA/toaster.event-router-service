@@ -1,10 +1,9 @@
 """Module "events".
 About:
-    Provides custom VK events. Convenient form,
-    additional data, nothing superfluous.
+    ...
 """
 
-from .base import BaseEvent
-from .event import MessageEvent, ButtonEvent
+from .event import Event
+from .fabric import Fabric
 
-__all__ = ("BaseEvent", "MessageEvent", "ButtonEvent")
+__all__ = ("Event", "Fabric")
