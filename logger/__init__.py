@@ -5,7 +5,7 @@ About:
     to the needs service.
 """
 
-from .logger import logger
+from .logger import Logger
 
 
-__all__ = ("logger",)
+__all__ = ("Logger",)

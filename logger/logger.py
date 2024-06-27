@@ -6,7 +6,16 @@ from tools import msk_now
 from .formatters import get_formatter
 
 
-class Logger(object):
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class Logger(object, metaclass=Singleton):
     """Logger class, creator of a new instance,
     Let's start registering. Provides basic
     logging functionality.
@@ -66,6 +75,3 @@ class Logger(object):
             text (str): Text of log message.
         """
         self.logger.critical(text)
-
-
-logger = Logger()
