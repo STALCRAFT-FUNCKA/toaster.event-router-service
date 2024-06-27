@@ -6,7 +6,6 @@ About:
 from .config import (
     QUEUE_BROKER_IP,
     TOKEN,
-    GROUP_ID,
     API_VERSION,
     LONGPOLL_REQUEST_TD,
     SERVICE_NAME,
@@ -18,7 +17,6 @@ from .config import (
 __all__ = (
     "QUEUE_BROKER_IP",
     "TOKEN",
-    "GROUP_ID",
     "API_VERSION",
     "LONGPOLL_REQUEST_TD",
     "SERVICE_NAME",
