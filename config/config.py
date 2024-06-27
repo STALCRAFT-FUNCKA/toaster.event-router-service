@@ -4,7 +4,7 @@ import os
 
 SERVICE_NAME = "toaster-dev.event-routing-service"
 
-QUEUE_BROKER_IP = "172.18.0.40"
+BROKER_ADDR = "172.18.0.40"
 
 TOKEN: str = os.getenv("TOKEN")
 

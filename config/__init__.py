@@ -4,7 +4,7 @@ About:
 """
 
 from .config import (
-    QUEUE_BROKER_IP,
+    BROKER_ADDR,
     TOKEN,
     API_VERSION,
     LONGPOLL_REQUEST_TD,
@@ -15,7 +15,7 @@ from .config import (
 
 
 __all__ = (
-    "QUEUE_BROKER_IP",
+    "BROKER_ADDR",
     "TOKEN",
     "API_VERSION",
     "LONGPOLL_REQUEST_TD",
