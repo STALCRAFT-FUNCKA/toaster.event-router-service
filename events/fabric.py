@@ -30,7 +30,7 @@ class Fabric(object):
         message_obj = (
             raw_event.get("object")
             if event.event_type == "button"
-            else raw_event.get("object").message
+            else raw_event.get("object").get("message")
         )
 
         self.__set_event_attributes(
