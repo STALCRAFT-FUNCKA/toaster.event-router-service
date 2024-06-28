@@ -55,7 +55,7 @@ class Fabric(object):
     @staticmethod
     def __get_event_type(raw_event: dict) -> str:
         if raw_event.get("type") == "message_new":
-            text: str = raw_event["object"].get("text")
+            text: str = raw_event["object"]["message"].get("text")
             if text.startswith(config.COMMAND_PREFIXES):
                 return "command"
 
