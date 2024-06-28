@@ -1,5 +1,6 @@
 """Module "fetcher"."""
 
+from typing import NoReturn
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
 import config
@@ -15,7 +16,8 @@ class Fetcher(object):
     __broker = Publisher()
     __fabric = Fabric()
 
-    def __init__(self):
+    def __init__(self, DEBUG: bool = False) -> NoReturn:
+        self.DEBUG = DEBUG
         self._session = VkApi(
             token=config.TOKEN,
             api_version=config.API_VERSION,
@@ -27,7 +29,7 @@ class Fetcher(object):
         )
         self.api = self._session.get_api()
 
-    def run(self):
+    def run(self) -> NoReturn:
         """Starts listening VK longpoll server."""
 
         self.__logger.info("Starting listening longpoll server...")
@@ -35,7 +37,13 @@ class Fetcher(object):
         for vk_event in self._longpoll.listen():
             event = self.__fabric(vk_event, self.api)
             if event is not None:
-                self.__logger.info(f"New event recived:\n{event}\n{event.as_dict()}")
+                self.__logger.info(
+                    (
+                        f"New event recived:\n{event}"
+                        f"\n{event.as_dict() if self.DEBUG else ''}"
+                    )
+                )
+
                 # self.__broker.publish(
                 #     obj=event,
                 #     channel_name="test",
