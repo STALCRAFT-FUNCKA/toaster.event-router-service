@@ -111,7 +111,7 @@ class Fabric(object):
             peer_id=bpid,
             conversation_message_ids=cmid,
         )
-        msg_obj = msg_obj["item"][0] if msg_obj["count"] else {}
+        msg_obj = msg_obj["items"][0] if msg_obj["count"] else {}
 
         if not msg_obj:
             return None
