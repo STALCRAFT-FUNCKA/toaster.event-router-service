@@ -17,6 +17,9 @@ class Event(object):
     def __repr__(self):
         return self.__str__()
 
+    # This method is only needed for logging
+    # That is emphasis is placed on ease of presentation
+    # Not used in future data exchange
     def as_dict(self):
         dict_repr = {}
         for attr, value in vars(self).items():
