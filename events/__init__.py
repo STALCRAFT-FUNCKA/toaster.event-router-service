@@ -4,6 +4,21 @@ About:
 """
 
 from .event import Event
-from .fabric import Fabric
+from .objects import (
+    Message,
+    Reply,
+    Reaction,
+    Button,
+    User,
+    Peer,
+)
 
-__all__ = ("Event", "Fabric")
+__all__ = (
+    "Event",
+    "Message",
+    "Reply",
+    "Reaction",
+    "Button",
+    "User",
+    "Peer",
+)
