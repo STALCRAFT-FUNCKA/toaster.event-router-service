@@ -19,6 +19,11 @@ class Message(NamedTuple):
     attachments: List[str]  # message attachments
 
 
+class Reaction(NamedTuple):
+    cmid: int  # conversation message id
+    rid: int  # reaction id
+
+
 class Reply(NamedTuple):
     cmid: int  # conversation message id
     text: str  # message text
