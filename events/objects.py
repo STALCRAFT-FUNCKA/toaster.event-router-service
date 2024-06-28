@@ -19,6 +19,11 @@ class Message(NamedTuple):
     attachments: List[str]  # message attachments
 
 
+class Reply(NamedTuple):
+    cmid: int  # conversation message id
+    text: str  # message text
+
+
 class User(NamedTuple):
     uuid: int  # user unique id
     name: str  # full user name

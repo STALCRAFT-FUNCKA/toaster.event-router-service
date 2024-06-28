@@ -6,6 +6,7 @@ from vk_api.bot_longpoll import VkBotEvent
 from .event import Event
 from .objects import (
     Message,
+    Reply,
     Button,
     User,
     Peer,
