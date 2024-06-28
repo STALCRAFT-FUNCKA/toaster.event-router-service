@@ -3,7 +3,7 @@
 from vk_api import VkApi
 import config
 from vk_api.bot_longpoll import VkBotEvent
-from events import (
+from broker.events import (
     Event,
     Message,
     Reply,
