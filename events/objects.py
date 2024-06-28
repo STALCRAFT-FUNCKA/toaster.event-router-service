@@ -16,7 +16,7 @@ class Message(NamedTuple):
     text: str  # message text
     auid: int  # author unique id
     reply: Optional[Message]  # replied message
-    forward: Optional[List[Message]]  # forwarded messages
+    forward: List[Message]  # forwarded messages
     attachments: List[str]  # message attachments
 
 
