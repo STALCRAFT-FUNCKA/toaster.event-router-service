@@ -6,7 +6,7 @@ from vk_api.bot_longpoll import VkBotLongPoll
 import config
 from logger import Logger
 from broker import Publisher
-from events import Fabric
+from fabric import Fabric
 
 
 class Fetcher(object):
