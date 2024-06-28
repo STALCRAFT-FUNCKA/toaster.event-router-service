@@ -7,6 +7,7 @@ from .event import Event
 from .objects import (
     Message,
     Reply,
+    Reaction,
     Button,
     User,
     Peer,
@@ -49,6 +50,8 @@ class Fabric(object):
 
         if event.event_type == "button":
             attribute_methods["button"] = self.__get_button_data
+        elif event.event_type == "reaction":
+            attribute_methods["reaction"] = self.__get_reaction_data
         else:
             attribute_methods["message"] = self.__get_message_data
 
@@ -71,7 +74,11 @@ class Fabric(object):
             return "reaction"
 
     def __get_user_data(self, msg_obj: dict):
-        uuid = msg_obj.get("user_id") or msg_obj.get("from_id")
+        uuid = (
+            msg_obj.get("user_id")
+            or msg_obj.get("from_id")
+            or msg_obj.get("reacted_id")
+        )
 
         user_info = self._api.users.get(user_ids=uuid, fields=["domain"])
         user_info = user_info[0] if user_info else {}
@@ -158,4 +165,10 @@ class Fabric(object):
             cmid=msg_obj.get("conversation_message_id"),
             beid=msg_obj.get("event_id"),
             payload=msg_obj.get("payload"),
+        )
+
+    def __get_reaction_data(self, msg_obj: dict):
+        return Reaction(
+            cmid=msg_obj.get("cmid"),
+            rid=msg_obj.get("reaction_id"),
         )
