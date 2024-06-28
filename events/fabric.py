@@ -141,7 +141,9 @@ class Fabric(object):
                 for fwd in forward
                 if fwd.get("peer_id")
             ]
-            attachments.append("forward")
+
+            if forward:
+                attachments.append("forward")
 
         result = Message(
             cmid=cmid,
