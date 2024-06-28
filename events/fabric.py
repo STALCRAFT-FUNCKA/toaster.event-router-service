@@ -106,19 +106,21 @@ class Fabric(object):
 
         return result
 
-    def __get_message_data(self, msg_obj: dict, allow_recursion: bool = True):
+    def __get_message_data(self, msg_obj: dict):
+        def _parse_reply(reply: dict):
+            return Reply(
+                cmid=reply.get("conversation_message_id"),
+                text=reply.get("text"),
+            )
+
         cmid = msg_obj.get("conversation_message_id")
         bpid = msg_obj.get("peer_id")
-        auid = msg_obj.get("from_id")
 
         msg_obj = self._api.messages.getByConversationMessageId(
             peer_id=bpid,
             conversation_message_ids=cmid,
         )
         msg_obj = msg_obj["items"][0] if msg_obj["count"] else {}
-
-        if not msg_obj:
-            return None
 
         attachments = [
             attachment.get("type") for attachment in msg_obj.get("attachments")
@@ -127,43 +129,26 @@ class Fabric(object):
         if msg_obj.get("geo"):
             attachments.append("geo")
 
-        if (reply := msg_obj.get("reply_message")) and allow_recursion:
-            reply = self.__get_message_data(
-                msg_obj=reply,
-                allow_recursion=False,
-            )
+        if reply := msg_obj.get("reply_message"):
+            reply = _parse_reply(reply)
             attachments.append("reply")
 
-        if (forward := msg_obj.get("fwd_messages")) and allow_recursion:
-            forward = [
-                self.__get_message_data(
-                    msg_obj=fwd,
-                    allow_recursion=False,
-                )
-                for fwd in forward
-                if fwd.get("peer_id")
-            ]
-
+        if forward := msg_obj.get("fwd_messages"):
+            forward = [_parse_reply(fwd) for fwd in forward if fwd.get("peer_id")]
             if forward:
                 attachments.append("forward")
 
-        result = Message(
+        return Message(
             cmid=cmid,
             text=msg_obj.get("text"),
-            auid=auid,
-            mpid=bpid,
             reply=reply,
             forward=forward,
             attachments=attachments,
         )
 
-        return result
-
     def __get_button_data(self, msg_obj: dict):
-        result = Button(
+        return Button(
             cmid=msg_obj.get("conversation_message_id"),
             beid=msg_obj.get("event_id"),
             payload=msg_obj.get("payload"),
         )
-
-        return result
