@@ -14,8 +14,8 @@ class Button(NamedTuple):
 class Message(NamedTuple):
     cmid: int  # conversation message id
     text: str  # message text
-    reply: Optional[Message]  # replied message
-    forward: List[Message]  # forwarded messages
+    reply: Optional[Reply]  # replied message
+    forward: List[Reply]  # forwarded messages
     attachments: List[str]  # message attachments
 
 
