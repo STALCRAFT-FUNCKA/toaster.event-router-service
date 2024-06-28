@@ -1,5 +1,7 @@
 """Module "events"."""
 
+from typing import NamedTuple
+
 
 class Event(object):
     """DOCSTRING"""
@@ -16,3 +18,14 @@ class Event(object):
 
     def __repr__(self):
         return self.__str__()
+
+    def as_dict(self):
+        dict_repr = {}
+        for attr, value in vars(self).items():
+            if not callable(value) and not attr.startswith("__"):
+                if isinstance(attr, NamedTuple):
+                    dict_repr[attr] = value._asdict()
+                else:
+                    dict_repr[attr] = value
+
+        return dict_repr
