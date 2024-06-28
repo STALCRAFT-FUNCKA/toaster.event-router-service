@@ -24,7 +24,7 @@ class User(NamedTuple):
     uuid: int  # user unique id
     name: str  # full user name
     firstname: str  # first name
-    surname: str  # surname
+    lastname: str  # surname
     nick: str  # tag/nick/url
 
 
