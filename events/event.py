@@ -21,6 +21,8 @@ class Event(object):
     # That is emphasis is placed on ease of presentation
     # Not used in future data exchange
     def as_dict(self):
+        """DOCSTRING"""
+
         dict_repr = {}
         for attr, value in vars(self).items():
             if not callable(value) and not attr.startswith("__"):
