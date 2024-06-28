@@ -31,7 +31,7 @@ class Fabric(object):
 
         message_obj = (
             raw_event.get("object")
-            if event.event_type == "button"
+            if event.event_type in ("button", "reaction")
             else raw_event.get("object").get("message")
         )
 
