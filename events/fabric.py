@@ -125,7 +125,6 @@ class Fabric(object):
         attachments = [
             attachment.get("type") for attachment in msg_obj.get("attachments")
         ]
-
         if msg_obj.get("geo"):
             attachments.append("geo")
 
@@ -135,8 +134,13 @@ class Fabric(object):
 
         if forward := msg_obj.get("fwd_messages"):
             forward = [_parse_reply(fwd) for fwd in forward if fwd.get("peer_id")]
-            if forward:
-                attachments.append("forward")
+
+            # The attachments "forward" tag may also be present
+            # If in forward = []
+            # This is because forwarded messages
+            # Transform into objects only if they
+            # Are in the same conversation where they were forwarded
+            attachments.append("forward")
 
         return Message(
             cmid=cmid,
