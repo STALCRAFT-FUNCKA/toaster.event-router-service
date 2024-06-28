@@ -107,7 +107,7 @@ class Fabric(object):
         cmid = msg_obj.get("conversation_message_id")
         bpid = msg_obj.get("peer_id")
 
-        msg_obj = self._api.messages.get(
+        msg_obj = self._api.messages.getByConversationMessageId(
             peer_id=bpid,
             conversation_message_ids=cmid,
         )
