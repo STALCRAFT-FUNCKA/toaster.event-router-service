@@ -1,7 +1,5 @@
 """Module "events"."""
 
-from typing import NamedTupleMeta
-
 
 class Event(object):
     """DOCSTRING"""
