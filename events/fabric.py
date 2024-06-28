@@ -125,13 +125,19 @@ class Fabric(object):
         if msg_obj.get("geo"):
             attachments.append("geo")
 
-        if reply := msg_obj.get("reply_message") and allow_recursion:
-            reply = self.__get_message_data(reply, False)
+        if (reply := msg_obj.get("reply_message")) and allow_recursion:
+            reply = self.__get_message_data(
+                msg_obj=reply,
+                allow_recursion=False,
+            )
             attachments.append("reply")
 
-        if forward := msg_obj.get("fwd_messages") and allow_recursion:
+        if (forward := msg_obj.get("fwd_messages")) and allow_recursion:
             forward = [
-                self.__get_message_data(fwd, False)
+                self.__get_message_data(
+                    msg_obj=fwd,
+                    allow_recursion=False,
+                )
                 for fwd in forward
                 if fwd.get("peer_id")
             ]
