@@ -23,6 +23,12 @@ class Event(object):
             if not callable(value) and not attr.startswith("__"):
                 if isinstance(value, tuple):
                     dict_repr[attr] = value._asdict()
+                    # Inside unpacking for reply and forward messages
+                    if attr == "mesage":
+                        reply = dict_repr[attr]["reply"]
+                        forward = dict_repr[attr]["forward"]
+                        dict_repr[attr]["reply"] = reply.as_dict() if reply else None
+                        dict_repr[attr]["forward"] = [fwd.as_dict() for fwd in forward]
                 else:
                     dict_repr[attr] = value
 
