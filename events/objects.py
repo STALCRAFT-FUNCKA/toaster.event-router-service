@@ -14,8 +14,6 @@ class Button(NamedTuple):
 class Message(NamedTuple):
     cmid: int  # conversation message id
     text: str  # message text
-    auid: int  # author unique id
-    mpid: int  # message peer id
     reply: Optional[Message]  # replied message
     forward: List[Message]  # forwarded messages
     attachments: List[str]  # message attachments

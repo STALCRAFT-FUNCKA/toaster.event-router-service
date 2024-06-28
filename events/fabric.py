@@ -108,6 +108,7 @@ class Fabric(object):
     def __get_message_data(self, msg_obj: dict, allow_recursion: bool = True):
         cmid = msg_obj.get("conversation_message_id")
         bpid = msg_obj.get("peer_id")
+        auid = msg_obj.get("from_id")
 
         msg_obj = self._api.messages.getByConversationMessageId(
             peer_id=bpid,
@@ -148,7 +149,8 @@ class Fabric(object):
         result = Message(
             cmid=cmid,
             text=msg_obj.get("text"),
-            auid=bpid,
+            auid=auid,
+            mpid=bpid,
             reply=reply,
             forward=forward,
             attachments=attachments,
