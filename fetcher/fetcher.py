@@ -44,7 +44,7 @@ class Fetcher(object):
                     )
                 )
 
-                # self.__broker.publish(
-                #     obj=event,
-                #     channel_name="test",
-                # )
+                self.__broker.publish(
+                    obj=event,
+                    channel_name=event.event_type,
+                )
