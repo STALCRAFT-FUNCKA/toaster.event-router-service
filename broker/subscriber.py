@@ -2,8 +2,8 @@
 
 from redis import Redis
 import config
-import dill as pickle
-from typing import NoReturn
+import cloudpickle as pickle
+from typing import NoReturn, Any
 
 
 class Subscriber(object):
@@ -24,5 +24,5 @@ class Subscriber(object):
                 yield self.__deserialize(event.get("data"))
 
     @staticmethod
-    def __deserialize(data: bytes) -> object:
+    def __deserialize(data: bytes) -> Any:
         return pickle.loads(data=data)

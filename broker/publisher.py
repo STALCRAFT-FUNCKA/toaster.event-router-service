@@ -2,7 +2,7 @@
 
 from redis import Redis
 import config
-import dill as pickle
+import cloudpickle as pickle
 from typing import NoReturn
 
 
