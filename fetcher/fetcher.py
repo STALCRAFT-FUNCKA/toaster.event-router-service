@@ -13,7 +13,7 @@ class Fetcher(object):
     """DOCSTRING"""
 
     __logger = Logger()
-    __broker = Publisher()
+    __broker = Publisher(host=config.BROKER_ADDR)
     __fabric = Fabric()
 
     def __init__(self, DEBUG: bool = False) -> NoReturn:
