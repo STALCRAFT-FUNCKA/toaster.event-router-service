@@ -35,7 +35,7 @@ class Fetcher(object):
         for vk_event in self._longpoll.listen():
             event = self.__fabric(vk_event, self.api)
             if event is not None:
-                self.__logger.info(f"New event recived:\n{str(event)}")
+                self.__logger.info(f"New event recived:\n{event}\n{event.as_dict()}")
                 # self.__broker.publish(
                 #     obj=event,
                 #     channel_name="test",
