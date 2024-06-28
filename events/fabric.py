@@ -106,8 +106,48 @@ class Fabric(object):
 
         return result
 
-    def __get_message_data(self, msg_obj: dict):
-        pass
+    def __get_message_data(self, msg_obj: dict, allow_recursion: bool = True):
+        cmid = msg_obj.get("conversation_message_id")
+        bpid = msg_obj.get("peer_id")
+
+        msg_obj = self._api.messages.get(
+            peer_id=bpid,
+            conversation_message_ids=cmid,
+        )
+        msg_obj = msg_obj["item"][0] if msg_obj["count"] else {}
+
+        if not msg_obj:
+            return None
+
+        attachments = [
+            attachment.get("type") for attachment in msg_obj.get("attachments")
+        ]
+
+        if msg_obj.get("geo"):
+            attachments.append("geo")
+
+        if reply := msg_obj.get("reply_message") and allow_recursion:
+            reply = self.__get_message_data(reply, False)
+            attachments.append("reply")
+
+        if forward := msg_obj.get("fwd_messages") and allow_recursion:
+            forward = [
+                self.__get_message_data(fwd, False)
+                for fwd in forward
+                if fwd.get("peer_id")
+            ]
+            attachments.append("forward")
+
+        result = Message(
+            cmid=cmid,
+            text=msg_obj.get("text"),
+            auid=bpid,
+            reply=reply,
+            forward=forward,
+            attachments=attachments,
+        )
+
+        return result
 
     def __get_button_data(self, msg_obj: dict):
         result = Button(
