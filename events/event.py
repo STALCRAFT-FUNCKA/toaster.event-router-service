@@ -23,7 +23,7 @@ class Event(object):
         dict_repr = {}
         for attr, value in vars(self).items():
             if not callable(value) and not attr.startswith("__"):
-                if isinstance(value, NamedTupleMeta):
+                if isinstance(value, tuple):
                     dict_repr[attr] = value._asdict()
                 else:
                     dict_repr[attr] = value
