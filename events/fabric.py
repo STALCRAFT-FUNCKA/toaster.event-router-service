@@ -38,6 +38,8 @@ class Fabric(object):
             msg_obj=message_obj,
         )
 
+        return event
+
     def __set_event_attributes(self, event: Event, msg_obj: dict):
         attribute_methods = {
             "user": self.__get_user_data,
