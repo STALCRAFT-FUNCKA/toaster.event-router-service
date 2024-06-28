@@ -15,7 +15,7 @@ from fetcher import Fetcher
 
 def main():
     """Entry point."""
-    fetcher = Fetcher()
+    fetcher = Fetcher(DEBUG=True)
     fetcher.run()
 
 
