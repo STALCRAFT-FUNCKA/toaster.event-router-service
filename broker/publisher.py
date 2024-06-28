@@ -1,7 +1,6 @@
 """Module "broker"."""
 
 from redis import Redis
-import config
 import dill as pickle
 from typing import NoReturn
 
@@ -9,8 +8,10 @@ from typing import NoReturn
 class Publisher(object):
     """DOCSTRING"""
 
-    def __init__(self) -> NoReturn:
-        self.client: Redis = Redis(host=config.BROKER_ADDR, port=6379, db=0)
+    def __init__(
+        self, host: str = "localhost", port: int = 6379, db: int = 0
+    ) -> NoReturn:
+        self.client = Redis(host=host, port=port, db=db)
 
     # TODO: make logs
     # TODO: handle possible exeptions
