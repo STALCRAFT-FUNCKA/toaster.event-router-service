@@ -67,6 +67,9 @@ class Fabric(object):
         if raw_event.get("type") == "message_event":
             return "button"
 
+        if raw_event.get("type") == "message_reaction_event":
+            return "reaction"
+
     def __get_user_data(self, msg_obj: dict):
         uuid = msg_obj.get("user_id") or msg_obj.get("from_id")
 
