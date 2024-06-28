@@ -2,7 +2,7 @@
 
 from redis import Redis
 import config
-import cloudpickle as pickle
+import dill as pickle
 from typing import NoReturn
 
 
@@ -24,4 +24,4 @@ class Publisher(object):
 
     @staticmethod
     def __serialize(obj: object) -> bytes:
-        return pickle.dumps(obj=obj, protocol=pickle.DEFAULT_PROTOCOL)
+        return pickle.dumps(obj=obj, protocol=pickle.HIGHEST_PROTOCOL)
