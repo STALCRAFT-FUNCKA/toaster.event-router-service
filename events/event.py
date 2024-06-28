@@ -1,6 +1,6 @@
 """Module "events"."""
 
-from typing import NamedTuple
+from typing import NamedTupleMeta
 
 
 class Event(object):
@@ -23,7 +23,7 @@ class Event(object):
         dict_repr = {}
         for attr, value in vars(self).items():
             if not callable(value) and not attr.startswith("__"):
-                if isinstance(attr, NamedTuple):
+                if isinstance(value, NamedTupleMeta):
                     dict_repr[attr] = value._asdict()
                 else:
                     dict_repr[attr] = value
