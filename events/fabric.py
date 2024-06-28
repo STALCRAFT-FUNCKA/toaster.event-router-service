@@ -22,9 +22,6 @@ class Fabric(object):
     def __handle(self, raw_event: dict, api: VkApi) -> Event | None:
         """DOCSTRING"""
 
-        if raw_event.get("type") not in self._routes:
-            return None
-
         event = Event(
             raw_event=raw_event,
             event_type=self.__get_event_type(raw_event),
