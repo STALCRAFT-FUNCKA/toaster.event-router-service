@@ -13,7 +13,14 @@ from colorama import Fore
 
 
 def get_formatter(colored: bool):
-    """DOCSTRING"""
+    """Returns a logging formatter based on the specified color preference.
+
+    Args:
+        colored (bool): Flag indicating whether to use colored output.
+
+    Returns:
+        logging.Formatter: Logging formatter object.
+    """
 
     return __colored() if colored else __mono()
 
