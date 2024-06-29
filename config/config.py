@@ -6,10 +6,6 @@ About:
     This module defines configuration variables used
     throughout the application, including service names,
     API tokens, broker addresses, and other settings.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 import os

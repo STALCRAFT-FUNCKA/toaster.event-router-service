@@ -8,10 +8,6 @@ About:
     key configuration constants such as API token,
     service name, and other settings required for proper
     operation.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 from .config import (

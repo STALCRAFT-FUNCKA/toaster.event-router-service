@@ -8,10 +8,6 @@ About:
     and deserializes incoming messages. It provides
     methods for initializing the Redis client, subscribing
     to channels, and listening for messages.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 from redis import Redis

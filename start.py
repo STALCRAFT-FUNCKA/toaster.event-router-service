@@ -1,13 +1,9 @@
 """Service "toaster.event-routing-service".
 About:
-    A service that listening to VKontakte longpolling server,
+    A service that listening to VKontakte long-polling server,
     receives events from it, and then forms them
     custom events, sending json data through the RabbitMQ
     to other handling services.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 from fetcher import Fetcher

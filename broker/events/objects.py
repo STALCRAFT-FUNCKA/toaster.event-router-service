@@ -9,10 +9,6 @@ About:
     classes include Button, Message, Reaction, Reply,
     User, and Peer, which encapsulate relevant data
     for event handling.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 from __future__ import annotations

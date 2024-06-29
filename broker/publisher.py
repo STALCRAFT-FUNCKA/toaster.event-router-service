@@ -8,10 +8,6 @@ About:
     serialized objects to Redis channels. It provides
     methods for initializing the Redis client, serializing
     objects, and publishing them to specified channels.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 from redis import Redis

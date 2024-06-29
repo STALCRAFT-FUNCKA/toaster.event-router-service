@@ -8,10 +8,6 @@ About:
     It serves as the entry point for accessing the
     broker's functionalities, which include message
     publishing and subscribing to message channels.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 from .publisher import Publisher

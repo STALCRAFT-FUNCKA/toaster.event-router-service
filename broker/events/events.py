@@ -8,10 +8,6 @@ About:
     of events.The Event class provides methods for
     initializing an event, representing it as a string,
     and converting it to a dictionary.
-
-Author:
-    Oidaho (Ruslan Bashinsky)
-    oidahomain@gmail.com
 """
 
 
