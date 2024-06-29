@@ -27,6 +27,13 @@ class Event(object):
     event_type: str = None
 
     def __init__(self, raw_event: dict, event_type: str = "Undefined"):
+        """Initializes an Event object.
+
+        Args:
+            raw_event (dict): Raw dictionary containing event data.
+            event_type (str): Type of the event (default is "Undefined").
+        """
+
         self.event_type = event_type
         self.event_id = raw_event.get("event_id")
 

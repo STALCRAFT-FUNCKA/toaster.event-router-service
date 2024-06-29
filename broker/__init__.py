@@ -1,6 +1,17 @@
 """Module "broker".
+File:
+    __init__.py
+
 About:
-    ...
+    This file initializes the 'broker' module by importing
+    and exposing the Publisher and Subscriber classes.
+    It serves as the entry point for accessing the
+    broker's functionalities, which include message
+    publishing and subscribing to message channels.
+
+Author:
+    Oidaho (Ruslan Bashinsky)
+    oidahomain@gmail.com
 """
 
 from .publisher import Publisher
