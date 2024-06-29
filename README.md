@@ -6,10 +6,11 @@
 
 **TOASTER.EVENT-ROUTING-SERVICE** - сервис фетчинга событий VK с его Long Polling сервера, преобразования их в более удобные обьекты и маршрутизации на другие сервисы для последующей обработки.
 
-### Входные данные:
+### Входные данные
 
 **RAW VK event:**
-```
+
+```shell
 content type: application\json
 
 {
@@ -55,62 +56,132 @@ content type: application\json
 
 Пример события, которое приходит от LongPoll сервера на toaster.event-routing-service.
 
-Далее, событие преобразуется в обьект кастомного события, которые выглядят следующим образом в JSON формате:
+Далее, событие преобразуется в обьект кастомного события, которые выглядят следующим образом:
 
-**MessageEvent:**
-```
-{
-    "ts": 1709107923,
-    "datetime": "2024-02-28 11:12:03",
-    "event_type": "message_new", 
-    "event_id": "8dd52b4d7c822b78db23db85bf351c7114e46b36", 
-    "user_id": 206295116, 
-    "user_name": "Руслан Башинский", 
-    "user_nick": "oidaho", 
-    "peer_id": 2000000002, 
-    "peer_name": "FUNCKA | DEV | CHAT", 
-    "chat_id": 2, 
-    "cmid": 2708, 
-    "text": "Hi!", 
-    "reply": null, 
-    "forward": [], 
-    "attachments": []
-}
+**Event**
+
+```python
+class Event(object):
+    event_id: str = None
+    event_type: str = None
+
+    # Динамически определяемые атрибуты:
+    # a. Обязательные атрибуты
+    peer: Peer
+    user: User
+
+    # b. Возможные атрибуты
+    message: Message
+    button: Button
+    reaction: Reaction
 ```
 
-**ButtonEvent:**
+Обязательныые атрибуты - атрибуты, которые будут динамически оперделены в любой ситуации.
+Данный о бользователе, который спровоцировал события, и беседе(узле\чате), в котором это событие произошло, будут определены всегда. Сервис гарантирует правильность их ппределения, за исключением случаев, вызванных ошибкой со стороны самого LongPoll сервера.
+
+Возможные атрибуты - атрибуты, которые определяются для класса события в зависимости от типа события. Так, например, данные о нажатии кнопки (Button) будут отсутствовать в событии команды.
+
+Динамически определяемые атрибуты содержат в себе значения, являющиеся экземплярами классов обьектов, описанных как наследники NamedTuple:
+
+**Button**
+
+```python
+class Button(NamedTuple):
+    cmid: int
+    beid: str
+    payload: dict
 ```
+
+**Message**
+
+```python
+class Message(NamedTuple):
+    cmid: int
+    text: str
+    reply: Optional[Reply]
+    forward: List[Reply]
+    attachments: List[str]
+```
+
+**Reaction**
+
+```python
+class Reaction(NamedTuple):
+    cmid: int
+    rid: int
+```
+
+**Reply**
+
+```python
+class Reply(NamedTuple):
+    cmid: int
+    text: str
+```
+
+**User**
+
+```python
+class User(NamedTuple):
+    uuid: int
+    name: str
+    firstname: str
+    lastname: str
+    nick: str
+```
+
+**Peer**
+
+```python
+class Peer(NamedTuple):
+    bpid: int
+    cid: int
+    name: str
+```
+
+Разумеется, для удобства представления информации и дебага, событие может быть представленно как dict объект при помощи метода `as_dict()`:
+
+**Event.as_dict()**
+
+```shell
+content type: application\json
+
 {
-    "ts": 1709107935, 
-    "datetime": "2024-02-28 11:12:15", 
-    "event_type": "button_pressed", 
-    "event_id": "e93488a3813b59f6c6b53ee51f59103e2a9240d6", 
-    "user_id": 206295116, 
-    "user_name": "Руслан Башинский", 
-    "user_nick": "oidaho", 
-    "peer_id": 2000000002, 
-    "peer_name": "FUNCKA | DEV | CHAT", 
-    "chat_id": 2, 
-    "cmid": 2618, 
-    "button_event_id": "ac89a3425ec3", 
-    "payload": {
-        "keyboard_owner_id": 206295116, 
-        "call_action": "test"
+    'event_type': 'command', 
+    'event_id': 'b0d7020c0bd1ad36b76567054400abc8b279f960', 
+    'user': {
+        'uuid': 206295116, 
+        'name': 'Руслан Башинский', 
+        'firstname': 'Руслан', 
+        'lastname': 'Башинский', 
+        'nick': 'oidaho'
+    }, 
+    'peer': {
+        'bpid': 2000000002, 
+        'cid': 2, 
+        'name': 'FUNCKA | TOASTER | DEV | CHAT'
+    }, 
+    'message': {
+        'cmid': 3895, 
+        'text': '/command', 
+        'reply': None, 
+        'forward': [], 
+        'attachments': []
     }
 }
 ```
 
 После исполнения всех преобразований, сервис отправляет событие, в зависимости от некоторых условий, на сервисы обработки соответствующих событий.
 
-
 ### Дополнительно
 
 Docker setup:
-```
+
+```shell
 docker network
     name: TOASTER
     ip_gateway: 172.18.0.1
-    subnet: 172.18.0.0/16
+    subnet: 172.18.0.0/24
     driver: bridge
 
 
@@ -124,13 +195,11 @@ docker image
 docker container
     name: toaster.event-routing-service
     network_ip: 172.18.0.5
-
-docker volumes:
-    /var/log/TOASTER/toaster.event-routing-service:/service/log
 ```
 
 Jenkins shell command:
-```
+
+```shell
 imageName="toaster.event-routing-service"
 containerName="toaster.event-routing-service"
 localIP="172.18.0.5"
@@ -150,7 +219,6 @@ docker build . -t $imageName \
 #run container
 docker run -d \
 --name $containerName \
---volume /var/log/TOASTER/$imageName:/service/logs \
 --restart always \
 $imageName
 
