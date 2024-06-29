@@ -1,4 +1,17 @@
-"""Module "fetcher"."""
+"""Module "fabric".
+
+File:
+    fabric.py
+
+About:
+    This file defines the Fabric class, which processes
+    VkBotEvent objects from VK API into Event objects,
+    encapsulating different types of events
+    (message, button press, reaction). It handles event
+    type detection, attribute setting, and data retrieval
+    from VK API for users, peers, messages, replies,
+    reactions, and buttons.
+"""
 
 from vk_api import VkApi
 import config
@@ -15,15 +28,23 @@ from broker.events import (
 
 
 class Fabric(object):
-    """DOCSTRING"""
+    """Class for processing VkBotEvent objects from VK API into Event objects."""
 
     def __call__(self, vk_event: VkBotEvent, api: VkApi) -> Event:
+        """Processes a VkBotEvent into an Event object.
+
+        Args:
+            vk_event (VkBotEvent): VkBotEvent object containing raw event data.
+            api (VkApi): VkApi object for making API requests.
+
+        Returns:
+            Event: Processed Event object.
+        """
+
         self._api = api
         return self.__handle(vk_event.raw, api)
 
     def __handle(self, raw_event: dict, api: VkApi) -> Event | None:
-        """DOCSTRING"""
-
         event = Event(
             raw_event=raw_event,
             event_type=self.__get_event_type(raw_event),

@@ -1,9 +1,10 @@
 """Module "config".
+
 File:
     __init__.py
 
 About:
-    This module initializes the configuration variables
+    This file initializes the configuration variables
     used throughout the service. It imports and exposes
     key configuration constants such as API token,
     service name, and other settings required for proper

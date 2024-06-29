@@ -1,4 +1,15 @@
-"""Module "fetcher"."""
+"""Module "fetcher".
+
+File:
+    fetcher.py
+
+About:
+    This file defines the Fetcher class responsible
+    for fetching VK API events using long polling,
+    processing them into Event objects using the
+    Fabric class, and publishing them to a message
+    broker.
+"""
 
 from typing import NoReturn
 from vk_api import VkApi
@@ -10,7 +21,20 @@ from fabric import Fabric
 
 
 class Fetcher(object):
-    """DOCSTRING"""
+    """Initializes Fetcher with optional debug mode.
+
+    Description:
+        Class responsible for fetching VK API events using long polling,
+        processing them into Event objects using the Fabric class,
+        and publishing them to a message broker.
+
+    Args:
+        DEBUG (bool, optional): Debug mode flag. Defaults to False.
+
+    Attributes:
+        DEBUG (bool): Debug mode flag.
+        api (object): VK API object.
+    """
 
     __logger = Logger()
     __broker = Publisher(host=config.BROKER_ADDR)
@@ -30,7 +54,12 @@ class Fetcher(object):
         self.api = self._session.get_api()
 
     def run(self) -> NoReturn:
-        """Starts listening VK longpoll server."""
+        """Listen long-poll server
+
+        Description:
+            Starts listening to the VK longpoll server and processes incoming events.
+            Logs received events and publishes them to the message broker.
+        """
 
         self.__logger.info("Starting listening longpoll server...")
 

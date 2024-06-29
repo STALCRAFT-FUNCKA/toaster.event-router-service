@@ -1,9 +1,10 @@
 """Module "config".
+
 File:
     config.py
 
 About:
-    This module defines configuration variables used
+    This file defines configuration variables used
     throughout the application, including service names,
     API tokens, broker addresses, and other settings.
 """

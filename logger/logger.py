@@ -1,4 +1,15 @@
-"""Module "logger"."""
+"""Module "logger".
+
+File:
+    logger.py
+
+About:
+    his file defines a Singleton Logger class that
+    provides logging functionalities for the application.
+    It initializes a logger with a specified service name
+    from the configuration and sets up a stream handler
+    with a formatter obtained from the formatters module.
+"""
 
 import logging
 import config
@@ -15,9 +26,14 @@ class Singleton(type):
 
 
 class Logger(object, metaclass=Singleton):
-    """Logger class, creator of a new instance,
-    Let's start registering. Provides basic
-    logging functionality.
+    """Initializes the Logger with instance.
+
+    Description:
+        Singleton Logger class that provides logging functionalities.
+        (like stream handler using a colored formatter for output.)
+
+    Attributes:
+        logger (logging.Logger): Logger instance initialized with the service name from config..
     """
 
     def __init__(self):
@@ -30,41 +46,46 @@ class Logger(object, metaclass=Singleton):
         self.logger.setLevel(logging.DEBUG)
 
     def info(self, text: str):
-        """Logs a message as info.
+        """Logs an informational message.
 
         Args:
-            text (str): Text of log message.
+            text (str): Message text to log.
         """
+
         self.logger.info(text)
 
     def debug(self, text: str):
-        """Logs a message as debug.
+        """Logs a debug message.
 
         Args:
-            text (str): Text of log message.
+            text (str): Message text to log.
         """
+
         self.logger.debug(text)
 
     def warning(self, text: str):
-        """Logs a message as warning.
+        """Logs a warning message.
 
         Args:
-            text (str): Text of log message.
+            text (str): Message text to log.
         """
+
         self.logger.warning(text)
 
     def error(self, text: str):
-        """Logs a message as error.
+        """Logs an error message.
 
         Args:
-            text (str): Text of log message.
+            text (str): Message text to log.
         """
+
         self.logger.error(text)
 
     def critical(self, text: str):
-        """Logs a message as critical.
+        """Logs a critical message.
 
         Args:
-            text (str): Text of log message.
+            text (str): Message text to log.
         """
+
         self.logger.critical(text)

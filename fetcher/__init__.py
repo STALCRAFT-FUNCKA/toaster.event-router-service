@@ -1,8 +1,14 @@
 """Module "fetcher".
+
+File:
+    __init__.py
+
 About:
-    Provides Fetcher class that receives data
-    from VK longpoll server by community access
-    token and roting events to queues in RabbitMQ.
+    This file initializes the 'fetcher' module by
+    importing and exposing the Fetcher class. It
+    serves as the entry point for accessing the
+    data fetching functionalities provided by the
+    Fetcher class.
 """
 
 from .fetcher import Fetcher

@@ -1,4 +1,12 @@
-"""Module "logger"."""
+"""Module "logger".
+
+File:
+    formatters.py
+
+About:
+    This file provides functions for creating logging
+    formatters with optional color support.
+"""
 
 import logging
 from colorama import Fore
