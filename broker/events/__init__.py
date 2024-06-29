@@ -10,7 +10,7 @@ About:
     for accessing various event-related functionalities.
 """
 
-from .event import Event
+from .events import Event
 from .objects import (
     Message,
     Reply,
