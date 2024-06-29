@@ -1,43 +1,107 @@
-"""Module "events"."""
+"""Submodule "events".
+File:
+    objects.py
+
+About:
+    This file contains the implementation of various
+    NamedTuple classes used for representing different
+    types of objects in the events submodule. These
+    classes include Button, Message, Reaction, Reply,
+    User, and Peer, which encapsulate relevant data
+    for event handling.
+
+Author:
+    Oidaho (Ruslan Bashinsky)
+    oidahomain@gmail.com
+"""
 
 from __future__ import annotations
 from typing import NamedTuple, List, Optional
 
 
-# TODO: Think about "cmid" duplication
 class Button(NamedTuple):
-    cmid: int  # conversation message id
-    beid: str  # button event(press) id
-    payload: dict  # button payload
+    """Class for representing a button press.
+
+    Attributes:
+        cmid (int): Conversation message ID.
+        beid (str): Button event (press) ID.
+        payload (dict): Button payload.
+    """
+
+    cmid: int
+    beid: str
+    payload: dict
 
 
 class Message(NamedTuple):
-    cmid: int  # conversation message id
-    text: str  # message text
-    reply: Optional[Reply]  # replied message
-    forward: List[Reply]  # forwarded messages
-    attachments: List[str]  # message attachments
+    """Class for representing a message.
+
+    Attributes:
+        cmid (int): Conversation message ID.
+        text (str): Message text.
+        reply (Optional[Reply]): Replied message.
+        forward (List[Reply]): Forwarded messages.
+        attachments (List[str]): Message attachments.
+    """
+
+    cmid: int
+    text: str
+    reply: Optional[Reply]
+    forward: List[Reply]
+    attachments: List[str]
 
 
 class Reaction(NamedTuple):
-    cmid: int  # conversation message id
-    rid: int  # reaction id
+    """Class for representing a reaction to a message.
+
+    Attributes:
+        cmid (int): Conversation message ID.
+        rid (int): Reaction ID.
+    """
+
+    cmid: int
+    rid: int
 
 
 class Reply(NamedTuple):
-    cmid: int  # conversation message id
-    text: str  # message text
+    """Class for representing a reply(fwd) to a message.
+
+    Attributes:
+        cmid (int): Conversation message ID.
+        text (str): Message text.
+    """
+
+    cmid: int
+    text: str
 
 
 class User(NamedTuple):
-    uuid: int  # user unique id
-    name: str  # full user name
-    firstname: str  # first name
-    lastname: str  # surname
-    nick: str  # tag/nick/url
+    """Class for representing a user.
+
+    Attributes:
+        uuid (int): User unique ID.
+        name (str): Full user name.
+        firstname (str): First name.
+        lastname (str): Last name.
+        nick (str): Tag/nick/URL.
+    """
+
+    uuid: int
+    name: str
+    firstname: str
+    lastname: str
+    nick: str
 
 
 class Peer(NamedTuple):
-    bpid: int  # bot peer id
-    cid: int  # chat id
-    name: str  # peer name
+    """Class for representing a peer.
+
+    Attributes:
+        bpid (int): Bot peer ID.
+        cid (int): Chat ID.
+        name (str): Peer name.
+    """
+
+    bpid: int
+    cid: int
+    name: str
