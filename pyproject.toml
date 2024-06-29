@@ -2,15 +2,16 @@
 package-mode = false
 name = "toaster.event-routing-service"
 version = "0.2.0"
-description = "pass"
+description = "TOASTER bot microservice, responsible for processing and routing VK LongPolling Server events."
+repository = "https://github.com/STALCRAFT-FUNCKA/toaster.event-routing-service"
+documentation = "https://github.com/STALCRAFT-FUNCKA/TOASTER/wiki"
 authors = [
     "Oidaho <oidahomain@gmail.com> (Ruslan Bashinsky)"
 ]
 license = "GNU GENERAL PUBLIC LICENSE | Version 3, 29 June 2007"
 readme = "README.md"
 packages = []
-repository = "https://github.com/STALCRAFT-FUNCKA/toaster.event-routing-service"
-documentation = "https://github.com/STALCRAFT-FUNCKA/TOASTER/wiki"
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
