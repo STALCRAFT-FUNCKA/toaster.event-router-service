@@ -1,6 +1,16 @@
-"""Module "events".
+"""Submodule "events".
+File:
+    __init__.py
+
 About:
-    ...
+    This file initializes the 'events' submodule by
+    importing and exposing key classes and objects
+    related to events. It serves as the entry point
+    for accessing various event-related functionalities.
+
+Author:
+    Oidaho (Ruslan Bashinsky)
+    oidahomain@gmail.com
 """
 
 from .event import Event
