@@ -9,10 +9,11 @@ About:
 """
 
 import logging
+from logging import Formatter
 from colorama import Fore
 
 
-def get_formatter(colored: bool):
+def get_formatter(colored: bool) -> Formatter:
     """Returns a logging formatter based on the specified color preference.
 
     Args:
@@ -25,7 +26,7 @@ def get_formatter(colored: bool):
     return __colored() if colored else __mono()
 
 
-def __colored():
+def __colored() -> Formatter:
     formatter = logging.Formatter(
         Fore.RED
         + "[ %(name)s | %(levelname)s | %(asctime)s ] "
@@ -36,7 +37,7 @@ def __colored():
     return formatter
 
 
-def __mono():
+def __mono() -> Formatter:
     formatter = logging.Formatter(
         "[ %(name)s | %(levelname)s | %(asctime)s ] " + "Message: %(message)s"
     )

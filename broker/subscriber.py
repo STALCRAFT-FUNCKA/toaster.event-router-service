@@ -13,10 +13,14 @@ About:
 
 from redis import Redis
 import dill as pickle
-from typing import NoReturn, Any
+from typing import (
+    NoReturn,
+    Any,
+    ByteString,
+)
 
 
-class Subscriber(object):
+class Subscriber:
     """Initializes the Subscriber with a Redis pubsub client.
 
     Descriprion:
@@ -40,7 +44,7 @@ class Subscriber(object):
 
     # TODO: Make logs
     # TODO: handle possible exeptions
-    def listen(self, channel_name: str) -> object:
+    def listen(self, channel_name: str) -> Any:
         """Listens to messages on a specified Redis channel and deserializes them.
 
         Args:
@@ -56,5 +60,5 @@ class Subscriber(object):
                 yield self.__deserialize(event.get("data"))
 
     @staticmethod
-    def __deserialize(data: bytes) -> Any:
+    def __deserialize(data: ByteString) -> Any:
         return pickle.loads(data=data)

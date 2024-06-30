@@ -20,7 +20,7 @@ from broker import Publisher
 from fabric import Fabric
 
 
-class Fetcher(object):
+class Fetcher:
     """Initializes Fetcher with optional debug mode.
 
     Description:

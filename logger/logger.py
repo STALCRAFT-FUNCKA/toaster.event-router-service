@@ -13,19 +13,23 @@ About:
 
 import logging
 import config
+from typing import NoReturn, TypeVar
 from .formatters import get_formatter
+
+
+T = TypeVar("T", bound="Logger")
 
 
 class Singleton(type):
     _instances = {}
 
-    def __call__(cls, *args, **kwargs):
+    def __call__(cls, *args, **kwargs) -> T:
         if cls not in cls._instances:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
-class Logger(object, metaclass=Singleton):
+class Logger(metaclass=Singleton):
     """Initializes the Logger with instance.
 
     Description:
@@ -36,7 +40,7 @@ class Logger(object, metaclass=Singleton):
         logger (logging.Logger): Logger instance initialized with the service name from config..
     """
 
-    def __init__(self):
+    def __init__(self) -> NoReturn:
         self.logger = logging.getLogger(config.SERVICE_NAME)
 
         stream_handler = logging.StreamHandler()
@@ -45,7 +49,7 @@ class Logger(object, metaclass=Singleton):
         self.logger.addHandler(stream_handler)
         self.logger.setLevel(logging.DEBUG)
 
-    def info(self, text: str):
+    def info(self, text: str) -> NoReturn:
         """Logs an informational message.
 
         Args:
@@ -54,7 +58,7 @@ class Logger(object, metaclass=Singleton):
 
         self.logger.info(text)
 
-    def debug(self, text: str):
+    def debug(self, text: str) -> NoReturn:
         """Logs a debug message.
 
         Args:
@@ -63,7 +67,7 @@ class Logger(object, metaclass=Singleton):
 
         self.logger.debug(text)
 
-    def warning(self, text: str):
+    def warning(self, text: str) -> NoReturn:
         """Logs a warning message.
 
         Args:
@@ -72,7 +76,7 @@ class Logger(object, metaclass=Singleton):
 
         self.logger.warning(text)
 
-    def error(self, text: str):
+    def error(self, text: str) -> NoReturn:
         """Logs an error message.
 
         Args:
@@ -81,7 +85,7 @@ class Logger(object, metaclass=Singleton):
 
         self.logger.error(text)
 
-    def critical(self, text: str):
+    def critical(self, text: str) -> NoReturn:
         """Logs a critical message.
 
         Args:

@@ -13,10 +13,14 @@ About:
 
 from redis import Redis
 import dill as pickle
-from typing import NoReturn
+from typing import (
+    NoReturn,
+    ByteString,
+    Any,
+)
 
 
-class Publisher(object):
+class Publisher:
     """Initializes the Publisher with a Redis client.
 
     Description:
@@ -38,7 +42,7 @@ class Publisher(object):
 
     # TODO: make logs
     # TODO: handle possible exeptions
-    def publish(self, obj: object, channel_name: str) -> int:
+    def publish(self, obj: Any, channel_name: str) -> int:
         """Publishes a serialized object to a Redis channel.
 
         Args:
@@ -55,5 +59,5 @@ class Publisher(object):
         return status
 
     @staticmethod
-    def __serialize(obj: object) -> bytes:
+    def __serialize(obj: Any) -> ByteString:
         return pickle.dumps(obj=obj, protocol=pickle.HIGHEST_PROTOCOL)

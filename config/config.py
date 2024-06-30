@@ -26,10 +26,10 @@ GROUP_ID: int = int(os.getenv("GROUPID"))
 # API version used for API requests
 API_VERSION: str = "5.199"
 
-# Timeout duration for long-polling requests
+# Timeout duration for long-polling requests (sec)
 LONGPOLL_REQUEST_TD: int = 10
 
-# Delay for VK group ID
+# Delay for VK group ID (difference between chat and peer)
 VK_GROUP_ID_DELAY = 2000000000
 
 # Command prefixes recognized by the bot
