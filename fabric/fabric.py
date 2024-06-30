@@ -58,6 +58,7 @@ class Fabric:
         )
 
         if not message_obj:
+            # TODO: Rise error inside try-except block and log it
             return None
 
         self.__set_event_attributes(
