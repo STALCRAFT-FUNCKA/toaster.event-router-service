@@ -19,7 +19,8 @@ class Event:
         event_id (str): Unique identifier for the event.
         event_type (str): Type of the event.
 
-    Dynamically defined attributes (cls Fabric):
+    ---OPTIONAL---
+    Dynamically defined attributes:
         Always determined:
             user (User): Data of the user who called the event.
             peer (Peer): Data of the peer where the event occurred.
