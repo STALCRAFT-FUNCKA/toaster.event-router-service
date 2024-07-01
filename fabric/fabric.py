@@ -13,7 +13,7 @@ About:
     reactions, and buttons.
 """
 
-from typing import Dict, Optional, Union, TypeVar
+from typing import Dict, Optional, Union
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
 from toaster.broker.events import (
@@ -27,9 +27,8 @@ from toaster.broker.events import (
 )
 import config
 
-# Python 3.12
-# type RawData = TypeVar("RawData", Dict[str, Union[str, int]])
-RawData = TypeVar("RawData", Dict[str, Union[str, int]])
+
+RawData = Dict[str, Union[str, int]]
 
 
 class Fabric:

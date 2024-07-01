@@ -13,11 +13,10 @@ About:
 """
 
 from __future__ import annotations
-from typing import NamedTuple, List, Optional, Dict, Union, TypeVar
+from typing import NamedTuple, List, Optional, Dict, Union
 
-# Python 3.12
-# type Payload = TypeVar("Payload", Dict[str, Union[str, int]])
-Payload = TypeVar("Payload", Dict[str, Union[str, int]])
+
+Payload = Dict[str, Union[str, int]]
 
 
 class Button(NamedTuple):
