@@ -6,7 +6,7 @@ description = "TOASTER bot microservice, responsible for processing and routing 
 repository = "https://github.com/STALCRAFT-FUNCKA/toaster.event-routing-service"
 documentation = "https://github.com/STALCRAFT-FUNCKA/TOASTER/wiki"
 authors = [
-    "Oidaho <oidahomain@gmail.com> (Ruslan Bashinsky)"
+    "Oidaho <oidahomain@gmail.com>"
 ]
 license = "GNU GENERAL PUBLIC LICENSE | Version 3, 29 June 2007"
 readme = "README.md"
