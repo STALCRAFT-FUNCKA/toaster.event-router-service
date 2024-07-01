@@ -13,7 +13,11 @@ About:
 """
 
 from __future__ import annotations
-from typing import NamedTuple, List, Optional
+from typing import NamedTuple, List, Optional, Dict, Union, TypeVar
+
+# Python 3.12
+# type Payload = TypeVar("Payload", Dict[str, Union[str, int]])
+Payload = TypeVar("Payload", Dict[str, Union[str, int]])
 
 
 class Button(NamedTuple):
@@ -22,12 +26,12 @@ class Button(NamedTuple):
     Attributes:
         cmid (int): Conversation message ID.
         beid (str): Button event (press) ID.
-        payload (dict): Button payload.
+        payload (Payload): Button payload.
     """
 
     cmid: int
     beid: str
-    payload: dict
+    payload: Payload
 
 
 class Message(NamedTuple):

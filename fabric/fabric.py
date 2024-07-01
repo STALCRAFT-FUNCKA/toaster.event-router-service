@@ -16,7 +16,7 @@ About:
 from vk_api import VkApi
 import config
 from vk_api.bot_longpoll import VkBotEvent
-from typing import Dict, Optional
+from typing import Dict, Optional, Union, TypeVar
 from broker.events import (
     Event,
     Message,
@@ -26,6 +26,10 @@ from broker.events import (
     User,
     Peer,
 )
+
+# Python 3.12
+# type RawData = TypeVar("RawData", Dict[str, Union[str, int]])
+RawData = TypeVar("RawData", Dict[str, Union[str, int]])
 
 
 class Fabric:
@@ -45,7 +49,7 @@ class Fabric:
         self._api = api
         return self.__handle(vk_event.raw, api)
 
-    def __handle(self, raw_event: Dict, api: VkApi) -> Optional[Event]:
+    def __handle(self, raw_event: RawData, api: VkApi) -> Optional[Event]:
         event = Event(
             raw_event=raw_event,
             event_type=self.__get_event_type(raw_event),
@@ -68,7 +72,7 @@ class Fabric:
 
         return event
 
-    def __set_event_attributes(self, event: Event, msg_obj: Dict):
+    def __set_event_attributes(self, event: Event, msg_obj: RawData):
         attribute_methods = {
             "user": self.__get_user_data,
             "peer": self.__get_peer_data,
@@ -85,7 +89,7 @@ class Fabric:
             event.__setattr__(attr, method(msg_obj=msg_obj))
 
     @staticmethod
-    def __get_event_type(raw_event: Dict) -> str:
+    def __get_event_type(raw_event: RawData) -> str:
         if raw_event.get("type") == "message_new":
             text: str = raw_event["object"]["message"].get("text")
             if text.startswith(config.COMMAND_PREFIXES):
@@ -99,7 +103,7 @@ class Fabric:
         if raw_event.get("type") == "message_reaction_event":
             return "reaction"
 
-    def __get_user_data(self, msg_obj: Dict):
+    def __get_user_data(self, msg_obj: RawData):
         uuid = (
             msg_obj.get("user_id")
             or msg_obj.get("from_id")
@@ -124,7 +128,7 @@ class Fabric:
 
         return result
 
-    def __get_peer_data(self, msg_obj: Dict):
+    def __get_peer_data(self, msg_obj: RawData):
         bpid = msg_obj.get("peer_id")
 
         peer_info = self._api.messages.getConversationsById(peer_ids=bpid)
@@ -142,7 +146,7 @@ class Fabric:
 
         return result
 
-    def __get_message_data(self, msg_obj: Dict):
+    def __get_message_data(self, msg_obj: RawData):
         def _parse_reply(reply: Dict):
             return Reply(
                 cmid=reply.get("conversation_message_id"),
@@ -186,14 +190,14 @@ class Fabric:
             attachments=attachments,
         )
 
-    def __get_button_data(self, msg_obj: Dict):
+    def __get_button_data(self, msg_obj: RawData):
         return Button(
             cmid=msg_obj.get("conversation_message_id"),
             beid=msg_obj.get("event_id"),
             payload=msg_obj.get("payload"),
         )
 
-    def __get_reaction_data(self, msg_obj: Dict):
+    def __get_reaction_data(self, msg_obj: RawData):
         return Reaction(
             cmid=msg_obj.get("cmid"),
             rid=msg_obj.get("reaction_id"),

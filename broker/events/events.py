@@ -12,12 +12,22 @@ About:
 """
 
 
-class Event(object):
+class Event:
     """Class for representing an event.
 
     Attributes:
         event_id (str): Unique identifier for the event.
         event_type (str): Type of the event.
+
+    Dynamically defined attributes (cls Fabric):
+        Always determined:
+            user (User): Data of the user who called the event.
+            peer (Peer): Data of the peer where the event occurred.
+
+        Determined depending on the type of event:
+            button (Button): Button click data.
+            reaction (Reaction): Reaction data for the message.
+            message (Message): Message data.
     """
 
     event_id: str = None
