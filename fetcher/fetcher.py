@@ -14,10 +14,10 @@ About:
 from typing import NoReturn
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
-import config
-from logger import Logger
-from broker import Publisher
+from toaster.logger import Logger
+from toaster.broker import Publisher
 from fabric import Fabric
+import config
 
 
 class Fetcher:

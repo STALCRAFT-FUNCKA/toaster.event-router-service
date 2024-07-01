@@ -13,11 +13,10 @@ About:
     reactions, and buttons.
 """
 
-from vk_api import VkApi
-import config
-from vk_api.bot_longpoll import VkBotEvent
 from typing import Dict, Optional, Union, TypeVar
-from broker.events import (
+from vk_api import VkApi
+from vk_api.bot_longpoll import VkBotEvent
+from toaster.broker.events import (
     Event,
     Message,
     Reply,
@@ -26,6 +25,7 @@ from broker.events import (
     User,
     Peer,
 )
+import config
 
 # Python 3.12
 # type RawData = TypeVar("RawData", Dict[str, Union[str, int]])
