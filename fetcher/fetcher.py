@@ -11,11 +11,10 @@ About:
     broker.
 """
 
-from typing import NoReturn
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
 from toaster.logger import Logger
-from toaster.broker import Publisher
+from toaster.broker import Publisher, build_connection
 from fabric import Fabric
 import config
 
@@ -37,10 +36,10 @@ class Fetcher:
     """
 
     __logger = Logger()
-    __broker = Publisher(host=config.BROKER_ADDR)
+    __broker = Publisher(client=build_connection(config.REDIS_CREDS))
     __fabric = Fabric()
 
-    def __init__(self, DEBUG: bool = False) -> NoReturn:
+    def __init__(self, DEBUG: bool = False) -> None:
         self.DEBUG = DEBUG
         self._session = VkApi(
             token=config.TOKEN,
@@ -53,7 +52,7 @@ class Fetcher:
         )
         self.api = self._session.get_api()
 
-    def run(self) -> NoReturn:
+    def run(self) -> None:
         """Listen long-poll server
 
         Description:

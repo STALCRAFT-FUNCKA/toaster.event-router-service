@@ -71,7 +71,7 @@ class Fabric:
 
         return event
 
-    def __set_event_attributes(self, event: Event, msg_obj: RawData):
+    def __set_event_attributes(self, event: Event, msg_obj: RawData) -> None:
         attribute_methods = {
             "user": self.__get_user_data,
             "peer": self.__get_peer_data,
@@ -102,7 +102,7 @@ class Fabric:
         if raw_event.get("type") == "message_reaction_event":
             return "reaction"
 
-    def __get_user_data(self, msg_obj: RawData):
+    def __get_user_data(self, msg_obj: RawData) -> User:
         uuid = (
             msg_obj.get("user_id")
             or msg_obj.get("from_id")
@@ -127,7 +127,7 @@ class Fabric:
 
         return result
 
-    def __get_peer_data(self, msg_obj: RawData):
+    def __get_peer_data(self, msg_obj: RawData) -> Peer:
         bpid = msg_obj.get("peer_id")
 
         peer_info = self._api.messages.getConversationsById(peer_ids=bpid)
@@ -145,7 +145,7 @@ class Fabric:
 
         return result
 
-    def __get_message_data(self, msg_obj: RawData):
+    def __get_message_data(self, msg_obj: RawData) -> Reply:
         def _parse_reply(reply: Dict):
             return Reply(
                 cmid=reply.get("conversation_message_id"),
@@ -189,14 +189,14 @@ class Fabric:
             attachments=attachments,
         )
 
-    def __get_button_data(self, msg_obj: RawData):
+    def __get_button_data(self, msg_obj: RawData) -> Button:
         return Button(
             cmid=msg_obj.get("conversation_message_id"),
             beid=msg_obj.get("event_id"),
             payload=msg_obj.get("payload"),
         )
 
-    def __get_reaction_data(self, msg_obj: RawData):
+    def __get_reaction_data(self, msg_obj: RawData) -> Reaction:
         return Reaction(
             cmid=msg_obj.get("cmid"),
             rid=msg_obj.get("reaction_id"),

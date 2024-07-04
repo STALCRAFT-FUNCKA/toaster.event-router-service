@@ -10,12 +10,17 @@ About:
 """
 
 import os
+from toaster.credentials import RedisCredentials
 
 # Service name used for identification
 SERVICE_NAME = "toaster-dev.event-routing-service"
 
-# Address of the message broker
-BROKER_ADDR = "172.18.0.40"
+# Redis (broker) credentials
+REDIS_CREDS = RedisCredentials(
+    host="172.18.0.40",
+    port=6379,
+    db=0,
+)
 
 # API token obtained from environment variable
 TOKEN: str = os.getenv("TOKEN")

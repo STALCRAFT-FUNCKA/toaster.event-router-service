@@ -12,7 +12,7 @@ About:
 """
 
 from .config import (
-    BROKER_ADDR,  # Address of the message broker
+    REDIS_CREDS,  # Redis (broker) credentials
     TOKEN,  # API token
     API_VERSION,  # Version of the API
     LONGPOLL_REQUEST_TD,  # Timeout for long-polling requests
@@ -23,7 +23,7 @@ from .config import (
 )
 
 __all__ = (
-    "BROKER_ADDR",
+    "REDIS_CREDS",
     "TOKEN",
     "API_VERSION",
     "LONGPOLL_REQUEST_TD",
