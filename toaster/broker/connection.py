@@ -4,33 +4,28 @@ File:
     connection.py
 
 About:
-    This file provides a connection to a Redis server.
-    It defines a Connection class that initializes a
-    connection to Redis using specified host, port,
-    and database number.
+    This module provides functionality to build a
+    connection to a Redis server. It includes a function
+    that takes Redis credentials and returns a Redis
+    connection object.
 """
 
 from redis import Redis
-from typing import NoReturn
+from toaster.credentials import RedisCredentials
 
 
-class Connection:
-    """A class to manage connection to a Redis server.
+def build_connection(creds: RedisCredentials) -> Redis:
+    """Builds and returns a Redis connection object.
 
-    Description:
-        This class initializes a connection to a Redis server
-        using the provided host, port, and database index.
-        It provides a property to access the Redis client.
+    Args:
+        creds (RedisCredentials): The credentials required to connect to the Redis.
 
-    Attributes:
-        client (Redis): The Redis client used for interacting with the Redis server.
+    Returns:
+        Redis: A Redis connection object.
     """
 
-    def __init__(
-        self, host: str = "localhost", port: int = 6379, db: int = 0
-    ) -> NoReturn:
-        self.client = Redis(host=host, port=port, db=db)
-
-    @property
-    def client(self) -> Redis:
-        return self.client
+    return Redis(
+        host=creds.host,
+        port=creds.port,
+        db=creds.db,
+    )
