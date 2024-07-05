@@ -56,3 +56,4 @@ class RedisCredentials(NamedTuple):
     host: str
     port: int
     db: int
+
