@@ -14,6 +14,7 @@ About:
     and processing by other components of the system.
 """
 
+import sys
 from fetcher import Fetcher
 from loguru import logger
 
