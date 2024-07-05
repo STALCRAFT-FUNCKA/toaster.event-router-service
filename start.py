@@ -15,11 +15,23 @@ About:
 """
 
 from fetcher import Fetcher
+from loguru import logger
+
+
+def setup_logger() -> None:
+    logger.remove()
+    logger.add(
+        sys.stdout,
+        colorize=True,
+        format="<red>{module}</red> | <green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | {message}",
+        level="DEBUG",
+    )
 
 
 def main():
     """Entry point."""
 
+    setup_logger()
     fetcher = Fetcher(DEBUG=True)
     fetcher.run()
 
