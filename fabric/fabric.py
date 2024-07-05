@@ -161,11 +161,9 @@ class Fabric:
         )
         msg_obj = msg_obj["items"][0] if msg_obj["count"] else {}
 
-        attachments = []
-        msg_attachments = msg_obj.get("attachments")
-        if msg_attachments:
-            attachments = [attachment.get("type") for attachment in msg_attachments]
-
+        attachments = [
+            attachment.get("type") for attachment in msg_obj.get("attachments")
+        ]
         if msg_obj.get("geo"):
             attachments.append("geo")
 
