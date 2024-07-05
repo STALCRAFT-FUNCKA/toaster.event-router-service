@@ -13,7 +13,7 @@ About:
 
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
-from toaster.logger import Logger
+from loguru import logger
 from toaster.broker import Publisher, build_connection
 from fabric import Fabric
 import config
@@ -35,7 +35,6 @@ class Fetcher:
         api (object): VK API object.
     """
 
-    __logger = Logger()
     __broker = Publisher(client=build_connection(config.REDIS_CREDS))
     __fabric = Fabric()
 
@@ -60,14 +59,13 @@ class Fetcher:
             Logs received events and publishes them to the message broker.
         """
 
-        self.__logger.info("Starting listening longpoll server...")
+        logger.info("Starting listening longpoll server...")
 
         for vk_event in self._longpoll.listen():
             event = self.__fabric(vk_event, self.api)
             if event is not None:
-                self.__logger.info(f"New event recived: \n{event}")
                 if self.DEBUG:
-                    self.__logger.debug(f"Dict repr: \n{event.as_dict()}")
+                    logger.debug(f"Dict repr: \n{event.as_dict()}")
 
                 self.__broker.publish(
                     obj=event,
