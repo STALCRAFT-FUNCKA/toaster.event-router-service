@@ -148,6 +148,7 @@ class Fabric:
     def __get_message_data(self, msg_obj: RawData) -> Reply:
         def _parse_reply(reply: Dict):
             return Reply(
+                uuid=reply.get("from_id"),
                 cmid=reply.get("conversation_message_id"),
                 text=reply.get("text"),
             )
