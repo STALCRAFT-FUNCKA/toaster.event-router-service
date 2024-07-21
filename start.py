@@ -33,7 +33,7 @@ def main():
     """Entry point."""
 
     setup_logger()
-    fetcher = Fetcher(DEBUG=True)
+    fetcher = Fetcher(DEBUG=False)
     fetcher.run()
 
 
