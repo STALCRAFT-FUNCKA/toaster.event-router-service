@@ -8,21 +8,21 @@ About:
 """
 
 from .config import (
-    REDIS_CREDS,  # Данные авторизации Redis
-    TOKEN,  # API токен
-    API_VERSION,  # Версия используемого API
-    LONGPOLL_REQUEST_TD,  # Тайм-аут для запросов на LPS
-    VK_GROUP_ID_DELAY,  # Разница между id чата и узла
-    COMMAND_PREFIXES,  # Префиксы команд
-    GROUP_ID,  # ID группы, под которой развернут бот
+    REDIS_CREDS,
+    TOKEN,
+    API_VERSION,
+    LONGPOLL_REQUEST_TD,
+    VK_GROUP_ID_DELAY,
+    COMMAND_PREFIXES,
+    GROUP_ID,
 )
 
 __all__ = (
-    "REDIS_CREDS",
-    "TOKEN",
-    "API_VERSION",
-    "LONGPOLL_REQUEST_TD",
-    "VK_GROUP_ID_DELAY",
-    "COMMAND_PREFIXES",
-    "GROUP_ID",
+    "REDIS_CREDS",  # Redis authorization data
+    "TOKEN",  # API token
+    "API_VERSION",  # Version of the API used
+    "LONGPOLL_REQUEST_TD",  # Timeout for LPS requests
+    "VK_GROUP_ID_DELAY",  # Difference between chat and node id
+    "COMMAND_PREFIXES",  # Command prefixes
+    "GROUP_ID",  # ID of the group under which the bot is deployed
 )
