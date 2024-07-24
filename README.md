@@ -67,9 +67,9 @@ class Event:
     user: User
 
     # b. Возможные атрибуты
-    message: Message
-    button: Button
-    reaction: Reaction
+    message: Message      # Опрееделяется при типе события "message" и "command"
+    button: Button        # Опрееделяется при типе события "button"
+    reaction: Reaction    # Опрееделяется при типе события "reaction"
 ```
 
 Обязательныые атрибуты - атрибуты, которые будут динамически оперделены в любой ситуации.
