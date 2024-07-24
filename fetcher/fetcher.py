@@ -4,11 +4,9 @@ File:
     fetcher.py
 
 About:
-    This file defines the Fetcher class responsible
-    for fetching VK API events using long polling,
-    processing them into Event objects using the
-    Fabric class, and publishing them to a message
-    broker.
+    This file describes the Fetcher class, which accepts
+    events from the VK LongPoll server and sends them to
+    the Fabric class.
 """
 
 from vk_api import VkApi
@@ -20,46 +18,33 @@ import config
 
 
 class Fetcher:
-    """Initializes Fetcher with optional debug mode.
+    """VK event fetcher.
 
-    Description:
-        Class responsible for fetching VK API events using long polling,
-        processing them into Event objects using the Fabric class,
-        and publishing them to a message broker.
-
-    Args:
+    Init args:
         DEBUG (bool, optional): Debug mode flag. Defaults to False.
-
-    Attributes:
-        DEBUG (bool): Debug mode flag.
-        api (object): VK API object.
     """
 
     __broker = Publisher(client=build_connection(config.REDIS_CREDS))
     __fabric = Fabric()
 
     def __init__(self, DEBUG: bool = False) -> None:
-        self.DEBUG = DEBUG
-        self._session = VkApi(
+        session = VkApi(
             token=config.TOKEN,
             api_version=config.API_VERSION,
         )
+
+        self.DEBUG = DEBUG
         self._longpoll = VkBotLongPoll(
             vk=self._session,
             wait=config.LONGPOLL_REQUEST_TD,
             group_id=config.GROUP_ID,
         )
-        self.api = self._session.get_api()
+        self.api = session.get_api()
 
     def run(self) -> None:
-        """Listen long-poll server
+        """Start listening to LongPoll server."""
 
-        Description:
-            Starts listening to the VK longpoll server and processes incoming events.
-            Logs received events and publishes them to the message broker.
-        """
-
-        logger.info("Starting listening longpoll server...")
+        logger.info("Starting listening to LPS...")
 
         for vk_event in self._longpoll.listen():
             event = self.__fabric(vk_event, self.api)

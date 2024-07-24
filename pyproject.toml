@@ -2,9 +2,9 @@
 package-mode = false
 name = "toaster.event-routing-service"
 version = "0.2.0"
-description = "TOASTER bot microservice, responsible for processing and routing VK LongPolling Server events."
-repository = "https://github.com/STALCRAFT-FUNCKA/toaster.event-routing-service"
-documentation = "https://github.com/STALCRAFT-FUNCKA/TOASTER/wiki"
+description = "TOASTER bot. Service for fetching VK events from the LongPoll server."
+repository = "https://github.com/FUNCKA-TOASTER/service.event-fetcher"
+documentation = "https://github.com/FUNCKA-TOASTER/TOASTER/wiki"
 authors = [
     "Oidaho <oidahomain@gmail.com>"
 ]

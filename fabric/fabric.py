@@ -4,13 +4,8 @@ File:
     fabric.py
 
 About:
-    This file defines the Fabric class, which processes
-    VkBotEvent objects from VK API into Event objects,
-    encapsulating different types of events
-    (message, button press, reaction). It handles event
-    type detection, attribute setting, and data retrieval
-    from VK API for users, peers, messages, replies,
-    reactions, and buttons.
+    This file defines the Fabric class, which produces
+    custom event objects from raw VK events.
 """
 
 from typing import Dict, Optional, Union
@@ -32,17 +27,17 @@ RawData = Dict[str, Union[str, int]]
 
 
 class Fabric:
-    """Class for processing VkBotEvent objects from VK API into Event objects."""
+    """Custom event factory class."""
 
     def __call__(self, vk_event: VkBotEvent, api: VkApi) -> Event:
-        """Processes a VkBotEvent into an Event object.
+        """Converts a raw VK event into a custom event object.
 
         Args:
-            vk_event (VkBotEvent): VkBotEvent object containing raw event data.
-            api (VkApi): VkApi object for making API requests.
+            vk_event (VkBotEvent): Raw VK event.
+            api (VkApi): VK API object.
 
         Returns:
-            Event: Processed Event object.
+            Event: Custom VK event object.
         """
 
         self._api = api
@@ -179,7 +174,7 @@ class Fabric:
             forward = [_parse_reply(fwd) for fwd in forward if fwd.get("peer_id")]
 
             # The attachments "forward" tag may also be present
-            # If in forward = []
+            # If forward = []
             # This is because forwarded messages
             # Transform into objects only if they
             # Are in the same conversation where they were forwarded

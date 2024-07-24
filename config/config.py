@@ -4,16 +4,12 @@ File:
     config.py
 
 About:
-    This file defines configuration variables used
-    throughout the application, including service names,
-    API tokens, broker addresses, and other settings.
+    This file defines the used variables
+    and configuration objects.
 """
 
 import os
 from toaster.credentials import RedisCredentials
-
-# Service name used for identification
-SERVICE_NAME = "toaster-dev.event-routing-service"
 
 # Redis (broker) credentials
 REDIS_CREDS = RedisCredentials(

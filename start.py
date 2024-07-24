@@ -1,17 +1,13 @@
-"""Service "toaster.event-routing-service".
+"""Service "service.event-fetching".
 
 File:
     start.py
 
 About:
-    This service is responsible for receiving raw events
-    from the VK LongPoll server, transforming them into
-    custom event objects, and sending these serialized
-    objects to Redis. The service listens for incoming
-    events, processes them to fit the custom event schema,
-    and ensures they are properly serialized before being
-    dispatched to the Redis storage, enabling further handling
-    and processing by other components of the system.
+    This service is responsible for receiving raw events from
+    LongPoll VKontakte servers, converting them into custom ones
+    event objects. Custom event objects are sent in serialized
+    form to the Redis bus for further routing.
 """
 
 import sys
@@ -30,7 +26,7 @@ def setup_logger() -> None:
 
 
 def main():
-    """Entry point."""
+    """Program entry point."""
 
     setup_logger()
     fetcher = Fetcher(DEBUG=False)
