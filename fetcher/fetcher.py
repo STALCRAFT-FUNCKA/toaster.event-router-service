@@ -35,7 +35,7 @@ class Fetcher:
 
         self.DEBUG = DEBUG
         self._longpoll = VkBotLongPoll(
-            vk=self._session,
+            vk=self.session,
             wait=config.LONGPOLL_REQUEST_TD,
             group_id=config.GROUP_ID,
         )
