@@ -9,7 +9,11 @@ About:
 """
 
 import os
-from toaster.credentials import RedisCredentials
+from toaster.credentials import (
+    RedisCredentials,
+    AlchemyCredentials,
+    AlchemySetup,
+)
 
 # Redis (broker) credentials
 REDIS_CREDS = RedisCredentials(
@@ -35,3 +39,19 @@ VK_GROUP_ID_DELAY = 2000000000
 
 # Command prefixes recognized by the bot
 COMMAND_PREFIXES = ("/", "!")
+
+
+# Setup for sqlalchemy. Driver, Database and DBMS.
+ALCHEMY_SETUP = AlchemySetup(
+    dialect="mysql",
+    driver="pymysql",
+    database="toaster_dev",  # TODO: Позже заменить на toaster
+)
+
+# DBMS credentials that includes host, port, user, password.
+DBMS_CREDS = AlchemyCredentials(
+    host=os.getenv("SQL_HOST"),
+    port=int(os.getenv("SQL_PORT")),
+    user=os.getenv("SQL_USER"),
+    pswd=os.getenv("SQL_PSWD"),
+)
