@@ -28,7 +28,7 @@ def setup_logger() -> None:
 
 
 def setup_db() -> None:
-    TOASTER_DB.create_tables(BaseModel)
+    TOASTER_DB.create_tables_site(BaseModel)
 
 
 def main():
