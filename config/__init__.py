@@ -15,6 +15,8 @@ from .config import (
     VK_GROUP_ID_DELAY,
     COMMAND_PREFIXES,
     GROUP_ID,
+    ALCHEMY_SETUP,
+    DBMS_CREDS,
 )
 
 __all__ = (
@@ -25,4 +27,6 @@ __all__ = (
     "VK_GROUP_ID_DELAY",  # Difference between chat and node id
     "COMMAND_PREFIXES",  # Command prefixes
     "GROUP_ID",  # ID of the group under which the bot is deployed
+    "ALCHEMY_SETUP",  # Setup for sqlalchemy. Driver, Database and DBMS.
+    "DBMS_CREDS",  # DBMS credentials includes host, port, user, password.
 )
