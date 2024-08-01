@@ -11,6 +11,7 @@ About:
 """
 
 import sys
+from db import TOASTER_DB
 from fetcher import Fetcher
 from loguru import logger
 
@@ -25,10 +26,15 @@ def setup_logger() -> None:
     )
 
 
+def setup_db() -> None:
+    TOASTER_DB.create_tables()
+
+
 def main():
     """Program entry point."""
 
     setup_logger()
+    setup_db()
     fetcher = Fetcher(DEBUG=False)
     fetcher.run()
 
