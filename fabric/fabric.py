@@ -46,7 +46,7 @@ class Fabric:
     def __handle(self, raw_event: RawData, api: VkApi) -> Optional[Event]:
         event = Event(
             raw_event=raw_event,
-            event_type=self.__get_event_type(raw_event),
+            type=self.__get_event_type(raw_event),
         )
 
         message_obj = (
