@@ -46,7 +46,7 @@ class Fabric:
     def __handle(self, raw_event: RawData, api: VkApi) -> Optional[Event]:
         event = Event(
             raw_event=raw_event,
-            event_type=self.__get_event_type(raw_event),
+            type=self.__get_event_type(raw_event),
         )
 
         message_obj = (
@@ -79,8 +79,8 @@ class Fabric:
         else:
             attribute_methods["message"] = self.__get_message_data
 
-        for attr, method in attribute_methods.items():
-            event.__setattr__(attr, method(msg_obj=msg_obj))
+        for name, method in attribute_methods.items():
+            event.add_object(name=name, value=method(msg_obj=msg_obj))
 
     @staticmethod
     def __get_event_type(raw_event: RawData) -> str:
