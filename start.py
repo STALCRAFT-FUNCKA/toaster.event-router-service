@@ -12,6 +12,7 @@ About:
 
 import sys
 from db import TOASTER_DB
+from toaster_utils.models import BaseModel
 from fetcher import Fetcher
 from loguru import logger
 
@@ -27,7 +28,7 @@ def setup_logger() -> None:
 
 
 def setup_db() -> None:
-    TOASTER_DB.create_tables()
+    TOASTER_DB.create_tables(BaseModel)
 
 
 def main():
