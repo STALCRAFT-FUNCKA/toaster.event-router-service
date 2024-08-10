@@ -166,14 +166,14 @@ docker network
 
 
 docker image
-    name: toaster.event-routing-service
+    name: service.event-fetcher
     args:
         TOKEN: "..."
         GROUPID: "..."
 
 
 docker container
-    name: toaster.event-routing-service
+    name: service.event-fetcher
     network_ip: 172.18.0.5
 ```
 
