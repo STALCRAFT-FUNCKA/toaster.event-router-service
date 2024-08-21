@@ -11,7 +11,7 @@ About:
 from typing import Dict, Optional, Union
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
-from toaster.broker.events import (
+from funcka_bots.broker.events import (
     Event,
     Message,
     Reply,

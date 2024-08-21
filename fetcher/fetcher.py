@@ -12,7 +12,7 @@ About:
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
 from loguru import logger
-from toaster.broker import Publisher, build_connection
+from funcka_bots.broker import Publisher, build_connection
 from fabric import Fabric
 import config
 

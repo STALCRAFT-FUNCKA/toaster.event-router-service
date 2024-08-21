@@ -12,7 +12,7 @@ About:
 
 import sys
 from db import TOASTER_DB
-from toaster_utils.models import BaseModel
+from toaster.models import BaseModel
 from fetcher import Fetcher
 from loguru import logger
 
