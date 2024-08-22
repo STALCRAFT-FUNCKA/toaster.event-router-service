@@ -52,7 +52,6 @@ class Fetcher:
                 logger.info(f"New event received: \n{event}")
                 if self.DEBUG:
                     logger.debug(f"Dict repr: \n{event.as_dict()}")
-                    logger.debug(f"VK_event: {vk_event}")
 
                 self.__broker.publish(
                     obj=event,
