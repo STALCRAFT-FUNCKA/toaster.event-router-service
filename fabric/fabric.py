@@ -182,10 +182,6 @@ class Fabric:
         return paylaod
 
     def _get_message_forward_data(self, forward: List[RawData]) -> List[Payload]:
-        from loguru import logger
-
-        logger.debug(forward)
-
         replies = [
             self._get_message_reply_data(fwd) for fwd in forward if fwd.get("peer_id")
         ]
