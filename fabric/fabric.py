@@ -149,9 +149,7 @@ class Fabric:
             attachments.append("geo")
 
         if reply := msg_obj.get("reply_message"):
-            logger.debug("reply")
             reply_payload = self._get_message_reply_data(reply)
-            logger.debug(reply_payload)
             attachments.append("reply")
 
         else:
@@ -159,6 +157,7 @@ class Fabric:
 
         if forward := msg_obj.get("fwd_messages"):
             logger.debug("forward")
+            logger.debug(forward)
             forward_payload = self._get_message_forward_data(forward)
             logger.debug(forward_payload)
             # The attachments "forward" tag may also be present
