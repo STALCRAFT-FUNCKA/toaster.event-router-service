@@ -151,15 +151,20 @@ class Fabric:
             reply_payload = self._get_message_reply_data(reply)
             attachments.append("reply")
 
+        else:
+            reply_payload = None
+
         if forward := msg_obj.get("fwd_messages"):
             forward_payload = self._get_message_forward_data(forward)
-
             # The attachments "forward" tag may also be present
             # If forward = []
             # This is because forwarded messages
             # Transform into payloads only if they
             # Are in the same conversation where they were forwarded
             attachments.append("forward")
+
+        else:
+            forward_payload = []
 
         payload = {
             "cmid": cmid,
