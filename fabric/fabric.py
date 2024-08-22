@@ -13,6 +13,7 @@ from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
 from funcka_bots.broker.events import BaseEvent, event_builder
 import config
+from loguru import logger
 
 
 RawData = Dict[str, Union[str, int]]
@@ -148,14 +149,18 @@ class Fabric:
             attachments.append("geo")
 
         if reply := msg_obj.get("reply_message"):
+            logger.debug("reply")
             reply_payload = self._get_message_reply_data(reply)
+            logger.debug(reply_payload)
             attachments.append("reply")
 
         else:
             reply_payload = None
 
         if forward := msg_obj.get("fwd_messages"):
+            logger.debug("forward")
             forward_payload = self._get_message_forward_data(forward)
+            logger.debug(forward_payload)
             # The attachments "forward" tag may also be present
             # If forward = []
             # This is because forwarded messages
