@@ -58,8 +58,8 @@ class Fabric:
         )
 
         event = event_builder.build_vkevent(
-            type=event_type,
-            id=event_id,
+            event_type=event_type,
+            event_id=event_id,
             peer=peer,
             user=user,
             message=message,
