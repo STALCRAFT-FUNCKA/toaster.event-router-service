@@ -156,15 +156,7 @@ class Fabric:
             reply_payload = None
 
         if forward := msg_obj.get("fwd_messages"):
-            logger.debug("forward")
-            logger.debug(forward)
             forward_payload = self._get_message_forward_data(forward)
-            logger.debug(forward_payload)
-            # The attachments "forward" tag may also be present
-            # If forward = []
-            # This is because forwarded messages
-            # Transform into payloads only if they
-            # Are in the same conversation where they were forwarded
             attachments.append("forward")
 
         else:
@@ -186,9 +178,8 @@ class Fabric:
         return paylaod
 
     def _get_message_forward_data(self, forward: List[RawData]) -> List[Payload]:
-        replies = [
-            self._get_message_reply_data(fwd) for fwd in forward if fwd.get("peer_id")
-        ]
+        # TODO: Научить метод отличать пересланные сообщения из той же беседы, и из сторонней
+        replies = [self._get_message_reply_data(fwd) for fwd in forward]
         return replies
 
     @staticmethod
