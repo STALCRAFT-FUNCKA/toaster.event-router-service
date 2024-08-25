@@ -11,9 +11,8 @@ About:
 from typing import Dict, Optional, Union, List, Tuple
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotEvent
-from funcka_bots.broker.events import BaseEvent, event_builder
+from funcka_bots.events import BaseEvent, event_builder
 import config
-from loguru import logger
 
 
 RawData = Dict[str, Union[str, int]]
@@ -26,12 +25,10 @@ class Fabric:
     def __call__(self, vk_event: VkBotEvent, api: VkApi) -> BaseEvent:
         """Converts a raw VK event into a custom event object.
 
-        Args:
-            vk_event (VkBotEvent): Raw VK event.
-            api (VkApi): VK API object.
-
-        Returns:
-            Event: Custom VK event object.
+        :param VkBotEvent vk_event: Raw VK event.
+        :param VkApi api: VK API object.
+        :return: Custom VK event object.
+        :rtype: Event
         """
 
         self._api = api
@@ -123,7 +120,7 @@ class Fabric:
 
         payload = {
             "bpid": bpid,
-            "cid": bpid - config.VK_GROUP_ID_DELAY,
+            "cid": bpid - config.VK_PEER_ID_DELAY,
             "name": peer_info.get("title"),
         }
 

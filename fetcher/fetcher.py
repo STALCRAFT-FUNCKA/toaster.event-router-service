@@ -12,7 +12,7 @@ About:
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
 from loguru import logger
-from funcka_bots.broker import Publisher, build_connection
+from funcka_bots.broker import Publisher
 from fabric import Fabric
 import config
 
@@ -24,20 +24,20 @@ class Fetcher:
         DEBUG (bool, optional): Debug mode flag. Defaults to False.
     """
 
-    __broker = Publisher(client=build_connection(config.REDIS_CREDS))
+    __broker = Publisher(creds=config.BROKER_CREDS)
     __fabric = Fabric()
 
     def __init__(self, DEBUG: bool = False) -> None:
         session = VkApi(
-            token=config.TOKEN,
-            api_version=config.API_VERSION,
+            token=config.VK_GROUP_TOKEN,
+            api_version=config.VK_API_VERSION,
         )
 
         self.DEBUG = DEBUG
         self._longpoll = VkBotLongPoll(
             vk=session,
             wait=config.LONGPOLL_REQUEST_TD,
-            group_id=config.GROUP_ID,
+            group_id=config.VK_GROUP_ID,
         )
         self.api = session.get_api()
 
@@ -55,5 +55,5 @@ class Fetcher:
 
                 self.__broker.publish(
                     obj=event,
-                    channel_name=event.event_type,
+                    queue_name=event.event_type,
                 )

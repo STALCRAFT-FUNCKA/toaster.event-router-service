@@ -1,4 +1,4 @@
-"""Service "service.event-fetching".
+"""Service "service.event-fetcher".
 
 File:
     start.py
@@ -11,8 +11,8 @@ About:
 """
 
 import sys
-from db import TOASTER_DB
 from toaster.models import BaseModel
+from toaster import TOASTER
 from fetcher import Fetcher
 from loguru import logger
 
@@ -28,7 +28,7 @@ def setup_logger() -> None:
 
 
 def setup_db() -> None:
-    TOASTER_DB.create_tables(BaseModel)
+    TOASTER.create_tables(BaseModel)
 
 
 def main():
