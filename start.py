@@ -36,7 +36,7 @@ def main():
 
     setup_logger()
     setup_db()
-    fetcher = Fetcher(DEBUG=True)
+    fetcher = Fetcher(DEBUG=False)
     fetcher.run()
 
 
