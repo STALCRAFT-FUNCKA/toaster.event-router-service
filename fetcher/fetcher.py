@@ -12,7 +12,7 @@ About:
 from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll
 from loguru import logger
-from funcka_bots.broker import Publisher
+from toaster import broker
 from fabric import Fabric
 import config
 
@@ -24,7 +24,6 @@ class Fetcher:
         DEBUG (bool, optional): Debug mode flag. Defaults to False.
     """
 
-    __broker = Publisher(creds=config.BROKER_CREDS)
     __fabric = Fabric()
 
     def __init__(self, DEBUG: bool = False) -> None:
@@ -53,7 +52,7 @@ class Fetcher:
                 if self.DEBUG:
                     logger.debug(f"Dict repr: \n{event.as_dict()}")
 
-                self.__broker.publish(
+                broker.publish(
                     obj=event,
                     queue_name=event.event_type,
                 )
